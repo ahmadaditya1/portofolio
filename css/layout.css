@@ -1,0 +1,306 @@
+/* tata letak */
+.content-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+}
+
+/* bilah utilitas */
+.utility-bar {
+    background-color: var(--soft-cloud);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+.utility-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.utility-left,
+.utility-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.utility-link {
+    color: var(--ink);
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.utility-link:hover {
+    color: var(--mute);
+}
+
+.utility-link-manage {
+    font-weight: 600;
+}
+
+.utility-sep {
+    color: var(--hairline);
+}
+
+/* navigasi utama */
+.primary-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--canvas);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -1px 0 var(--hairline-soft);
+    transition: var(--transition-smooth);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    color: var(--ink);
+    transition: var(--transition-fast);
+}
+
+.nav-logo:hover {
+    opacity: 0.7;
+}
+
+.swoosh-logo {
+    width: 60px;
+    height: 22px;
+}
+
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    gap: var(--space-xl);
+}
+
+.nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    position: relative;
+    padding: 4px 0;
+    transition: var(--transition-fast);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--ink);
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--mute);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.nav-icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--rounded-full);
+    background-color: var(--soft-cloud);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: var(--transition-fast);
+}
+
+.nav-icon-btn:hover {
+    background-color: var(--ink);
+    color: var(--on-primary);
+}
+
+.nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--rounded-full);
+    background-color: var(--soft-cloud);
+    color: var(--ink);
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.crud-nav-title {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--ink);
+}
+
+/* bagian kaki */
+.site-footer {
+    background-color: var(--ink);
+    color: var(--stone);
+    padding: var(--space-section) 0 var(--space-xl) 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-section);
+    margin-bottom: var(--space-section);
+}
+
+.footer-heading {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--on-primary);
+    margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-links li {
+    margin-bottom: var(--space-sm);
+}
+
+.footer-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--stone);
+    transition: var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--on-primary);
+}
+
+.footer-social {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--rounded-full);
+    background-color: rgba(255,255,255,0.08);
+    color: var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: var(--transition-fast);
+}
+
+.social-icon:hover {
+    background-color: var(--on-primary);
+    color: var(--ink);
+}
+
+.footer-bottom {
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-legal {
+    font-size: 12px;
+    color: var(--stone);
+}
+
+/* tata letak responsif */
+@media (max-width: 1023px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .utility-bar {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-center {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--canvas);
+        border-bottom: 1px solid var(--hairline-soft);
+        padding: var(--space-xl) 0;
+        display: none;
+        z-index: 99;
+    }
+
+    .nav-center.show {
+        display: flex;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xl);
+    }
+
+    .nav-icon-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 599px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .content-container {
+        padding: 0 16px;
+    }
+}

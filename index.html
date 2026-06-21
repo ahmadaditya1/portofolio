@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Aditya Nugraha — Portofolio (Struktur HTML)</title>
+</head>
+<body>
+
+    <!-- navigasi utama -->
+    <header>
+        <div>
+            <!-- logo -->
+            <a href="#">
+                <strong>PORTFOLIO</strong>
+            </a>
+
+            <!-- menu navigasi -->
+            <nav>
+                <ul>
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="#tentang">Tentang Saya</a></li>
+                    <li><a href="#portofolio">Portofolio</a></li>
+                    <li><a href="#dukungan">Dukungan</a></li>
+                </ul>
+            </nav>
+
+            <!-- tombol aksi -->
+            <div>
+                <a href="crud.php">Tambah Portofolio</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- bagian hero -->
+        <section id="beranda">
+            <div>
+                <h1>ADITYA NUGRAHA</h1>
+                <p>Mahasiswa UNS · Kreator Visual & Pembuat Film</p>
+                <div>
+                    <a href="#portofolio">Lihat Karya</a>
+                    <a href="#dukungan">Beri Dukungan</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- bagian tentang saya -->
+        <section id="tentang">
+            <div>
+                <h2>TENTANG SAYA</h2>
+                <p>
+                    Halo! Saya Ahmad Aditya Nugraha. Saya adalah seorang mahasiswa UNS jurusan Informatika angkatan 2024 yang memiliki minat pada bidang kreator visual, pembuat film, dan desainer grafis. Saya suka menggabungkan keindahan estetika dengan fungsionalitas untuk menceritakan kisah yang memikat.
+                </p>
+                <p>
+                    Dengan ketertarikan mendalam dalam dunia sinematografi dan desain visual, saya telah menyutradarai beberapa proyek film pendek yang berhasil meraih penghargaan di kompetisi tingkat provinsi.
+                </p>
+
+                <!-- daftar penghargaan -->
+                <div>
+                    <h3>Penghargaan Utama</h3>
+                    <ul>
+                        <li>
+                            <span>2023</span>
+                            <strong>Juara 3 Film Pendek FLS2N</strong>
+                            <p>Tingkat Provinsi Jawa Timur — "Jemari Usang"</p>
+                        </li>
+                        <li>
+                            <span>2022</span>
+                            <strong>Juara 2 Film Pendek FLS2N</strong>
+                            <p>Tingkat Provinsi Jawa Timur — "Warisan"</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- statistik -->
+                <div>
+                    <div>
+                        <strong>3+</strong>
+                        <span>Tahun Pengalaman</span>
+                    </div>
+                    <div>
+                        <strong>12+</strong>
+                        <span>Proyek Selesai</span>
+                    </div>
+                    <div>
+                        <strong>2×</strong>
+                        <span>Pemenang FLS2N</span>
+                    </div>
+                    <div>
+                        <strong>100%</strong>
+                        <span>Semangat</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- bagian portofolio -->
+        <section id="portofolio">
+            <div>
+                <h2>PORTOFOLIO</h2>
+
+                <!-- kategori chips -->
+                <div>
+                    <button>Semua</button>
+                    <button>Film & Video</button>
+                    <button>Desain Grafis</button>
+                    <button>Kepanitiaan</button>
+                </div>
+
+                <!-- grid karya -->
+                <div>
+                    <!-- karya 1 -->
+                    <article>
+                        <img src="./img/jemariusang.jpg" alt="Jemari Usang">
+                        <span>Film Pendek</span>
+                        <h3>Jemari Usang</h3>
+                        <p>Film & Video</p>
+                        <p>🏆 Juara 3 FLS2N Provinsi Jawa Timur 2023</p>
+                        <button>Lihat Detail</button>
+                    </article>
+
+                    <!-- karya 2 -->
+                    <article>
+                        <img src="./img/warisan.jpg" alt="Warisan">
+                        <span>Film Pendek</span>
+                        <h3>Warisan</h3>
+                        <p>Film & Video</p>
+                        <p>🏆 Juara 2 FLS2N Provinsi Jawa Timur 2022</p>
+                        <button>Lihat Detail</button>
+                    </article>
+
+                    <!-- karya 3 -->
+                    <article>
+                        <img src="./img/aftermovie.jpg" alt="Aftermovie">
+                        <span>Videografi</span>
+                        <h3>Aftermovie Event</h3>
+                        <p>Film & Video</p>
+                        <p>🎥 Aftermovie Production</p>
+                        <button>Lihat Detail</button>
+                    </article>
+
+                    <!-- karya 4 -->
+                    <article>
+                        <img src="./img/gif.jpg" alt="PKKMB 2025">
+                        <span>Grafis Bergerak</span>
+                        <h3>PKKMB 2025 Animation</h3>
+                        <p>Desain Grafis</p>
+                        <p>⚡ Official Media Asset</p>
+                        <button>Lihat Detail</button>
+                    </article>
+
+                    <!-- karya 5 -->
+                    <article>
+                        <img src="./img/stud1.jpg" alt="STUDEX Branding">
+                        <span>Desain Grafis</span>
+                        <h3>STUDEX Branding</h3>
+                        <p>Desain Grafis</p>
+                        <p>✨ Visual Branding</p>
+                        <button>Lihat Detail</button>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- bagian artikel terbaru dari api -->
+        <section id="artikel-api">
+            <div>
+                <h2>ARTIKEL TERBARU</h2>
+                <p>Dimuat secara dinamis via AJAX dari REST API publik</p>
+                <div>
+                    <p>Memuat artikel...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- bagian dukungan -->
+        <section id="dukungan">
+            <div>
+                <h2>BERIKAN DUKUNGAN</h2>
+                <p>Tinggalkan pesan dukungan, kesan, atau kritik membangun.</p>
+
+                <!-- form kirim pesan -->
+                <div>
+                    <form>
+                        <div>
+                            <label for="nama-dukungan">Nama Lengkap</label>
+                            <input type="text" id="nama-dukungan" name="name" placeholder="Masukkan nama Anda" required>
+                        </div>
+                        <div>
+                            <label for="email-dukungan">Alamat Email</label>
+                            <input type="email" id="email-dukungan" name="email" placeholder="contoh@mail.com" required>
+                        </div>
+                        <div>
+                            <label for="pesan-dukungan">Kata-kata Pendukung</label>
+                            <textarea id="pesan-dukungan" name="message" placeholder="Tuliskan pesan penyemangat..." required></textarea>
+                        </div>
+                        <button type="submit">Kirim Dukungan</button>
+                    </form>
+                </div>
+
+                <!-- daftar pesan dukungan terkini -->
+                <div>
+                    <h3>Pesan Terbaru</h3>
+                    <div>
+                        <p>Belum ada pesan dukungan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- footer halaman -->
+    <footer>
+        <div>
+            <p>© 2025 Ahmad Aditya Nugraha. Praktikum Pemrograman Web — UNS.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

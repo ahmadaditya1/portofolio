@@ -1,0 +1,53 @@
+:root {
+    /* merek dan latar */
+    --ink: #111111;
+    --canvas: #ffffff;
+    --soft-cloud: #f5f5f5;
+    --on-primary: #ffffff;
+
+    /* teks */
+    --charcoal: #39393b;
+    --ash: #4b4b4d;
+    --mute: #707072;
+    --stone: #9e9ea0;
+
+    /* pembatas */
+    --hairline: #cacacb;
+    --hairline-soft: #e5e5e5;
+
+    /* semantik */
+    --sale: #d30005;
+    --sale-deep: #780700;
+    --success: #007d48;
+    --success-bright: #1eaa52;
+    --info: #1151ff;
+
+    /* aksen */
+    --accent-pink: #ed1aa0;
+    --accent-teal: #0a7281;
+
+    /* tipografi */
+    --font-display: 'Anton', 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+    /* lengkungan sudut */
+    --rounded-none: 0px;
+    --rounded-sm: 18px;
+    --rounded-md: 24px;
+    --rounded-lg: 30px;
+    --rounded-full: 9999px;
+
+    /* jarak */
+    --space-xxs: 2px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 18px;
+    --space-xl: 24px;
+    --space-xxl: 30px;
+    --space-section: 48px;
+
+    /* transisi */
+    --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.2s ease;
+}
