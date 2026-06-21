@@ -96,12 +96,12 @@ $(document).ready(function () {
                             categoryLabel = item.kategori;
                         }
                         let cardHtml = `
-                            <div class="product-card" data-category="${item.kategori}">
-                                <div class="product-card-image">
-                                    <img src="./img/${item.gambar}" alt="${item.judul}" loading="lazy">
-                                    <span class="product-card-badge">${item.lencana}</span>
-                                    <div class="product-card-overlay">
-                                        <button class="btn-pill-on-image btn-detail-porto"
+                            <div class="bg-canvas overflow-hidden cursor-pointer transition-all duration-350 ease-smooth hover:opacity-85 group product-card" data-category="${item.kategori}">
+                                <div class="relative w-full aspect-square bg-soft-cloud overflow-hidden">
+                                    <img src="./img/${item.gambar}" alt="${item.judul}" class="w-full h-full object-cover transition-transform duration-600 ease-in-out group-hover:scale-105" loading="lazy">
+                                    <span class="absolute top-3 left-3 bg-canvas text-ink text-[12px] font-medium px-3 py-1 rounded-full border border-hairline z-[2]">${item.lencana}</span>
+                                    <div class="absolute bottom-3 left-3 z-[2] opacity-0 translate-y-2 transition-all duration-350 ease-smooth group-hover:opacity-100 group-hover:translate-y-0">
+                                        <button class="bg-canvas text-ink px-5 py-2.5 rounded-full text-sm font-medium inline-flex items-center gap-2 border-none cursor-pointer transition-all duration-200 hover:bg-soft-cloud btn-detail-porto"
                                             data-title="${item.judul}"
                                             data-category="${categoryLabel}"
                                             data-achievement="${item.pencapaian || ''}"
@@ -112,10 +112,10 @@ $(document).ready(function () {
                                         </button>
                                     </div>
                                 </div>
-                                <div class="product-card-meta">
-                                    <p class="product-card-name">${item.judul}</p>
-                                    <p class="product-card-category">${categoryLabel}</p>
-                                    ${item.pencapaian ? '<p class="product-card-achievement">' + item.pencapaian + '</p>' : ''}
+                                <div class="py-2">
+                                    <p class="text-base font-medium text-ink mb-0.5">${item.judul}</p>
+                                    <p class="text-sm font-medium text-mute">${categoryLabel}</p>
+                                    ${item.pencapaian ? '<p class="text-sm text-mute mt-1">' + item.pencapaian + '</p>' : ''}
                                 </div>
                             </div>
                         `;
@@ -304,15 +304,15 @@ $(document).ready(function () {
                             year: "numeric",
                         });
                         container.append(`
-                            <div class="message-card">
-                                <p class="message-author">${msg.nama}</p>
-                                <p class="message-text">${msg.pesan}</p>
-                                <span class="message-date">${date}</span>
+                            <div class="py-[18px] border-b border-hairline first:pt-0">
+                                <p class="text-sm font-semibold text-ink mb-0.5">${msg.nama}</p>
+                                <p class="text-sm text-mute leading-normal mb-1">${msg.pesan}</p>
+                                <span class="text-xs text-stone">${date}</span>
                             </div>
                         `);
                     });
                 } else {
-                    container.html('<p class="no-messages">Belum ada pesan dukungan.</p>');
+                    container.html('<p class="text-sm text-stone italic">Belum ada pesan dukungan.</p>');
                 }
             },
         });

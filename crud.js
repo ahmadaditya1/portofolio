@@ -30,20 +30,22 @@ $(document).ready(function () {
 
                         let pencapaian = item.pencapaian ? item.pencapaian : '-';
                         let rowHtml = `
-                            <tr>
-                                <td>${index + 1}</td>
-                                <td>
-                                    <img src="./img/${item.gambar}" alt="${item.judul}" class="table-thumb" onerror="this.src='./img/default.jpg'">
+                            <tr class="hover:bg-soft-cloud">
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">${index + 1}</td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">
+                                    <img src="./img/${item.gambar}" alt="${item.judul}" class="w-[60px] h-[60px] object-cover bg-soft-cloud" onerror="this.src='./img/default.jpg'">
                                 </td>
-                                <td><strong>${item.judul}</strong></td>
-                                <td><span class="category-pill">${kategoriLabel}</span></td>
-                                <td>${pencapaian}</td>
-                                <td>
-                                    <div class="table-actions">
-                                        <button type="button" class="btn-table-edit btn-edit-porto" data-id="${item.id}" title="Edit Proyek">
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle"><strong>${item.judul}</strong></td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">
+                                    <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-soft-cloud text-ink">${kategoriLabel}</span>
+                                </td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">${pencapaian}</td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">
+                                    <div class="flex gap-2">
+                                        <button type="button" class="w-9 h-9 rounded-full flex items-center justify-center text-sm cursor-pointer transition-all duration-200 border-none bg-soft-cloud text-ink hover:bg-ink hover:text-canvas btn-edit-porto" data-id="${item.id}" title="Edit Proyek">
                                             <i class="fa-solid fa-pen"></i>
                                         </button>
-                                        <button type="button" class="btn-table-delete btn-delete-porto" data-id="${item.id}" data-judul="${item.judul}" title="Hapus Proyek">
+                                        <button type="button" class="w-9 h-9 rounded-full flex items-center justify-center text-sm cursor-pointer transition-all duration-200 border-none bg-[rgba(211,0,5,0.06)] text-sale hover:bg-sale hover:text-canvas btn-delete-porto" data-id="${item.id}" data-judul="${item.judul}" title="Hapus Proyek">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
@@ -102,12 +104,12 @@ $(document).ready(function () {
                         });
 
                         let rowHtml = `
-                            <tr>
-                                <td>${index + 1}</td>
-                                <td><strong>${msg.nama}</strong></td>
-                                <td><a href="mailto:${msg.email}" style="color: var(--info); text-decoration: underline;">${msg.email}</a></td>
-                                <td>${msg.pesan}</td>
-                                <td><span style="font-size: 12px; color: var(--mute);">${date}</span></td>
+                            <tr class="hover:bg-soft-cloud">
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">${index + 1}</td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle"><strong>${msg.nama}</strong></td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle"><a href="mailto:${msg.email}" class="text-info underline">${msg.email}</a></td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle">${msg.pesan}</td>
+                                <td class="p-3.5 px-6 text-sm text-charcoal border-b border-hairline-soft align-middle"><span class="text-xs text-mute">${date}</span></td>
                             </tr>
                         `;
                         tbody.append(rowHtml);
