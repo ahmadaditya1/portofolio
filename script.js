@@ -208,7 +208,7 @@ $(document).ready(function () {
     // Character counter
     $('#hire-message').on('input', function () {
         const len = $(this).val().length;
-        $('#hire-char-count').text(len.toLocaleString('en-US') + ' / 5,000');
+        $('#hire-char-count').text(len.toLocaleString('id-ID') + ' / 5.000');
     });
 
     // Form submit
@@ -262,14 +262,14 @@ $(document).ready(function () {
             success: function (response) {
                 showToast('Pesan berhasil terkirim ke email! Terima kasih.', 'success');
                 form[0].reset();
-                $('#hire-char-count').text('0 / 5,000');
+                $('#hire-char-count').text('0 / 5.000');
                 closeHireModal();
             },
             error: function () {
                 showToast('Gagal mengirim pesan. Silakan coba lagi nanti.', 'error');
             },
             complete: function () {
-                submitBtn.prop('disabled', false).removeClass('opacity-70 cursor-not-allowed').html('Send Message <i class="fa-regular fa-paper-plane text-sm"></i>');
+                submitBtn.prop('disabled', false).removeClass('opacity-70 cursor-not-allowed').html('Kirim Pesan <i class="fa-regular fa-paper-plane text-sm"></i>');
             }
         });
     });
