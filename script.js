@@ -1,9 +1,65 @@
 $(document).ready(function () {
 
-    // deteksi mode
-    const isServerMode = window.location.protocol !== "file:" && !window.location.pathname.includes(".html");
+    // ===== NAVBAR SCROLL EFFECT =====
+    const nav = document.getElementById('primary-nav');
 
-    // navigasi scroll spy & mobile toggle
+    function updateNavStyle() {
+        if (window.pageYOffset > 60) {
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', updateNavStyle);
+    updateNavStyle(); // init
+
+    // ===== FADE-IN ON SCROLL =====
+    const fadeElements = document.querySelectorAll('.fade-in-up');
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // trigger counter animation jika ada
+                const counters = entry.target.querySelectorAll('[data-count]');
+                counters.forEach(counter => animateCounter(counter));
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    fadeElements.forEach(el => fadeObserver.observe(el));
+
+    // ===== COUNTER ANIMATION =====
+    function animateCounter(el) {
+        if (el.dataset.animated) return; // prevent double
+        el.dataset.animated = 'true';
+
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const start = performance.now();
+
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            el.textContent = current + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    // ===== NAVIGASI SCROLL SPY =====
     $(window).scroll(function () {
         let scrollPos = $(window).scrollTop();
 
@@ -19,7 +75,7 @@ $(document).ready(function () {
         });
     });
 
-    // mobile nav toggle
+    // ===== MOBILE NAV TOGGLE =====
     $("#toggle-menu").click(function () {
         $("#nav-center").toggleClass("show");
         let icon = $(this).find("i");
@@ -38,7 +94,7 @@ $(document).ready(function () {
         }
     });
 
-    // smooth scroll
+    // ===== SMOOTH SCROLL =====
     $("a[href^='#']").on("click", function (event) {
         if (this.hash !== "") {
             event.preventDefault();
@@ -53,89 +109,7 @@ $(document).ready(function () {
         }
     });
 
-    // animasi mengetik
-    const roles = [
-        "Kreator Visual & Pembuat Film",
-        "Juara 2 FLS2N Jawa Timur 2022",
-        "Juara 3 FLS2N Jawa Timur 2023",
-        "Founder PortaPic",
-    ];
-    let roleIndex = 0;
-
-    setInterval(function () {
-        roleIndex = (roleIndex + 1) % roles.length;
-        $("#teks-peran").fadeOut(300, function () {
-            $(this).text(roles[roleIndex]).fadeIn(400);
-        });
-    }, 3000);
-
-    // load portofolio
-    if (isServerMode) {
-        loadPortfolioFromDB();
-    }
-
-    function loadPortfolioFromDB() {
-        $.ajax({
-            url: "api.php?action=read",
-            type: "GET",
-            dataType: "json",
-            success: function (response) {
-                let container = $("#portfolio-items");
-                container.empty();
-
-                if (response.status === "success" && response.data.length > 0) {
-                    response.data.forEach(function (item) {
-                        let categoryLabel = "";
-                        if (item.kategori === "film") {
-                            categoryLabel = "Film & Video";
-                        } else if (item.kategori === "design") {
-                            categoryLabel = "Desain Grafis";
-                        } else if (item.kategori === "kepanitiaan") {
-                            categoryLabel = "Kepanitiaan";
-                        } else {
-                            categoryLabel = item.kategori;
-                        }
-                        let cardHtml = `
-                            <div class="bg-canvas overflow-hidden cursor-pointer transition-all duration-350 ease-smooth hover:opacity-85 group product-card" data-category="${item.kategori}">
-                                <div class="relative w-full aspect-square bg-soft-cloud overflow-hidden">
-                                    <img src="./img/${item.gambar}" alt="${item.judul}" class="w-full h-full object-cover transition-transform duration-600 ease-in-out group-hover:scale-105" loading="lazy">
-                                    <span class="absolute top-3 left-3 bg-canvas text-ink text-[12px] font-medium px-3 py-1 rounded-full border border-hairline z-[2]">${item.lencana}</span>
-                                    <div class="absolute bottom-3 left-3 z-[2] opacity-0 translate-y-2 transition-all duration-350 ease-smooth group-hover:opacity-100 group-hover:translate-y-0">
-                                        <button class="bg-canvas text-ink px-5 py-2.5 rounded-full text-sm font-medium inline-flex items-center gap-2 border-none cursor-pointer transition-all duration-200 hover:bg-soft-cloud btn-detail-porto"
-                                            data-title="${item.judul}"
-                                            data-category="${categoryLabel}"
-                                            data-achievement="${item.pencapaian || ''}"
-                                            data-image="./img/${item.gambar}"
-                                            data-video="${item.video_url || ''}"
-                                            data-desc="${item.deskripsi}">
-                                            Lihat Detail <i class="fa-solid fa-arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="py-2">
-                                    <p class="text-base font-medium text-ink mb-0.5">${item.judul}</p>
-                                    <p class="text-sm font-medium text-mute">${categoryLabel}</p>
-                                    ${item.pencapaian ? '<p class="text-sm text-mute mt-1">' + item.pencapaian + '</p>' : ''}
-                                </div>
-                            </div>
-                        `;
-                        container.append(cardHtml);
-                    });
-                }
-            },
-            error: function () {
-                // tampilkan pesan error jika pemuatan dari api gagal
-                $("#portfolio-items").html(
-                    '<div style="grid-column: 1/-1; text-align: center; color: var(--sale); padding: 40px 0;">' +
-                    '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; margin-bottom: 12px;"></i>' +
-                    '<p>Gagal memuat data dari database. Pastikan Apache & MySQL di Laragon sudah aktif.</p>' +
-                    '</div>'
-                );
-            },
-        });
-    }
-
-    // filter chip
+    // ===== FILTER CHIP =====
     $(".filter-chip").click(function () {
         let filterValue = $(this).attr("data-filter");
 
@@ -143,297 +117,170 @@ $(document).ready(function () {
         $(this).addClass("active");
 
         if (filterValue === "all") {
-            $(".product-card").fadeIn(400);
+            $(".product-card").show();
         } else {
             $(".product-card").each(function () {
                 if ($(this).attr("data-category") === filterValue) {
-                    $(this).fadeIn(400);
+                    $(this).show();
                 } else {
-                    $(this).fadeOut(200);
+                    $(this).hide();
                 }
             });
         }
+        updateHorizontalScroll();
     });
 
-    // modal detail portofolio
-    $(document).on("click", ".btn-detail-porto", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // ===== HORIZONTAL SCROLL PORTOFOLIO =====
+    const portoSection = document.getElementById('portofolio');
+    const portoTrack = document.getElementById('portfolio-track');
+    const portoSticky = document.getElementById('portfolio-sticky');
 
-        let title = $(this).attr("data-title");
-        let category = $(this).attr("data-category");
-        let achievement = $(this).attr("data-achievement");
-        let imageSrc = $(this).attr("data-image");
-        let videoUrl = $(this).attr("data-video");
-        let description = $(this).attr("data-desc");
+    function updateHorizontalScroll() {
+        if (!portoSection || !portoTrack) return;
 
-        $("#judul-modal").text(title);
-        $("#tag-kat-modal").text(category);
-        $("#tag-prestasi-modal").text(achievement);
-        $("#deskripsi-modal").text(description);
+        const navHeight = 60;
+        const rect = portoSection.getBoundingClientRect();
+        const stickyHeight = portoSticky ? portoSticky.offsetHeight : (window.innerHeight - navHeight);
+        const maxScroll = portoSection.offsetHeight - stickyHeight;
+        if (maxScroll <= 0) {
+            portoTrack.style.transform = 'translateX(0px)';
+            return;
+        }
 
-        if (videoUrl) {
-            $("#wadah-media-modal").html(
-                '<iframe src="' + videoUrl + '" width="100%" height="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-            );
+        const scrolled = navHeight - rect.top;
+        const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
+        const maxTranslate = portoTrack.scrollWidth - window.innerWidth + 96;
+
+        if (maxTranslate <= 0) {
+            portoTrack.style.transform = 'translateX(0px)';
         } else {
-            $("#wadah-media-modal").html(
-                '<img src="' + imageSrc + '" alt="' + title + '">'
-            );
+            portoTrack.style.transform = `translateX(-${progress * maxTranslate}px)`;
         }
-
-        $("#modal-detail")
-            .css("display", "flex")
-            .hide()
-            .fadeIn(250, function () {
-                $(this).find(".modal-card").slideDown(350);
-            });
-        $("body").css("overflow", "hidden");
-    });
-
-    // tutup modal detail
-    $("#tombol-tutup-detail").click(function () {
-        closeDetailModal();
-    });
-
-    $("#modal-detail").click(function (e) {
-        if ($(e.target).hasClass("modal-overlay")) {
-            closeDetailModal();
-        }
-    });
-
-    $(".modal-support-btn").click(function () {
-        closeDetailModal();
-    });
-
-    function closeDetailModal() {
-        let modal = $("#modal-detail");
-        modal.find(".modal-card").slideUp(250, function () {
-            modal.fadeOut(200, function () {
-                $("#wadah-media-modal").html("");
-                $("body").css("overflow", "auto");
-            });
-        });
     }
 
-    // form dukungan
-    if (isServerMode) {
-        loadSupportMessages();
+    window.addEventListener('scroll', updateHorizontalScroll, { passive: true });
+    window.addEventListener('resize', updateHorizontalScroll);
+    updateHorizontalScroll();
+
+    // ===== HIRE ME MODAL OVERLAY =====
+    const hireModal = $('#hire-modal');
+
+    function openHireModal() {
+        hireModal.removeClass('hidden').addClass('flex');
+        setTimeout(function () {
+            hireModal.removeClass('opacity-0').addClass('opacity-100');
+            hireModal.find('.hire-modal-card').removeClass('scale-95').addClass('scale-100');
+        }, 10);
+        $('body').css('overflow', 'hidden');
+        $('#hire-name').focus();
     }
 
-    // reset error state pada input nama ketika pengguna mengetik/fokus kembali
-    $("#nama-dukungan").on("input focus", function () {
-        $(this)
-            .removeClass("input-error")
-            .attr("placeholder", "Masukkan nama Anda");
+    function closeHireModal() {
+        hireModal.removeClass('opacity-100').addClass('opacity-0');
+        hireModal.find('.hire-modal-card').removeClass('scale-100').addClass('scale-95');
+        setTimeout(function () {
+            hireModal.removeClass('flex').addClass('hidden');
+            $('body').css('overflow', '');
+        }, 250);
+    }
+
+    $('#btn-hire-me').on('click', function (e) {
+        e.preventDefault();
+        openHireModal();
     });
 
-    $("#form-dukungan").submit(function (e) {
+    $('#btn-close-modal').on('click', function () {
+        closeHireModal();
+    });
+
+    hireModal.on('click', function (e) {
+        if (e.target === this) {
+            closeHireModal();
+        }
+    });
+
+    $(document).on('keydown', function (e) {
+        if (e.key === 'Escape' && !hireModal.hasClass('hidden')) {
+            closeHireModal();
+        }
+    });
+
+    // Character counter
+    $('#hire-message').on('input', function () {
+        const len = $(this).val().length;
+        $('#hire-char-count').text(len.toLocaleString('en-US') + ' / 5,000');
+    });
+
+    // Form submit
+    $('#hire-form').on('submit', function (e) {
         e.preventDefault();
 
-        let nama = $("#nama-dukungan").val().trim();
-        let email = $("#email-dukungan").val().trim();
-        let pesan = $("#pesan-dukungan").val().trim();
+        const form = $(this);
+        const submitBtn = $('#btn-submit-hire');
+        const name = $('#hire-name').val().trim();
+        const email = $('#hire-email').val().trim();
+        const subject = $('#hire-subject').val().trim();
+        const message = $('#hire-message').val().trim();
 
-        if (isServerMode) {
-            // simpan ke database via ajax
-            $.ajax({
-                url: "api.php",
-                type: "POST",
-                data: {
-                    action: "dukungan",
-                    nama: nama,
-                    email: email,
-                    pesan: pesan,
-                },
-                dataType: "json",
-                success: function (response) {
-                    if (response.status === "success") {
-                        showThankyou(nama);
-                        loadSupportMessages();
-                    } else {
-                        if (response.message.includes("nama")) {
-                            $("#nama-dukungan")
-                                .val("")
-                                .attr("placeholder", "!nama tidak boleh berisi angka dan spasi")
-                                .addClass("input-error");
-                        } else {
-                            showToast(response.message, "error");
-                        }
-                    }
-                },
-                error: function () {
-                    showToast("Terjadi kesalahan koneksi ke server.", "error");
-                },
-            });
-        } else {
-            // mode statis
-            showThankyou(nama);
+        if (!name) {
+            showToast('Mohon isi nama Anda.', 'error');
+            $('#hire-name').focus();
+            return;
         }
-    });
 
-    function showThankyou(nama) {
-        $("#teks-pesan-terimakasih").text(
-            "Terima kasih atas dukungan Anda, " + nama + "!"
-        );
-        $("#form-dukungan")[0].reset();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            showToast('Mohon isi alamat email yang valid.', 'error');
+            $('#hire-email').focus();
+            return;
+        }
 
-        $("#modal-terimakasih")
-            .css("display", "flex")
-            .hide()
-            .fadeIn(250, function () {
-                $(this).find(".modal-card").slideDown(350);
-            });
-        $("body").css("overflow", "hidden");
-    }
+        if (!message) {
+            showToast('Mohon isi pesan Anda.', 'error');
+            $('#hire-message').focus();
+            return;
+        }
 
-    function loadSupportMessages() {
+        submitBtn.prop('disabled', true).addClass('opacity-70 cursor-not-allowed').html('<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...');
+
         $.ajax({
-            url: "api.php?action=read_dukungan",
-            type: "GET",
-            dataType: "json",
+            url: 'https://formsubmit.co/ajax/ahmadadityan94@gmail.com',
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: JSON.stringify({
+                name: name,
+                email: email,
+                _subject: subject ? `[Portofolio] ${subject}` : `[Portofolio] Pesan dari ${name}`,
+                message: message,
+                _template: 'table',
+                _captcha: 'false'
+            }),
             success: function (response) {
-                let container = $("#daftar-pesan-dukungan");
-                container.empty();
-
-                if (response.status === "success" && response.data.length > 0) {
-                    response.data.slice(0, 5).forEach(function (msg) {
-                        let date = new Date(msg.created_at).toLocaleDateString("id-ID", {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                        });
-                        container.append(`
-                            <div class="py-[18px] border-b border-hairline first:pt-0">
-                                <p class="text-sm font-semibold text-ink mb-0.5">${msg.nama}</p>
-                                <p class="text-sm text-mute leading-normal mb-1">${msg.pesan}</p>
-                                <span class="text-xs text-stone">${date}</span>
-                            </div>
-                        `);
-                    });
-                } else {
-                    container.html('<p class="text-sm text-stone italic">Belum ada pesan dukungan.</p>');
-                }
-            },
-        });
-    }
-
-    // tutup modal terimakasih
-    $("#tombol-tutup-terimakasih, #tombol-oke-terimakasih").click(function () {
-        closeThankyouModal();
-    });
-
-    $("#modal-terimakasih").click(function (e) {
-        if ($(e.target).hasClass("modal-overlay")) {
-            closeThankyouModal();
-        }
-    });
-
-    function closeThankyouModal() {
-        let modal = $("#modal-terimakasih");
-        modal.find(".modal-card").slideUp(250, function () {
-            modal.fadeOut(200, function () {
-                $("body").css("overflow", "auto");
-            });
-        });
-    }
-
-    // artikel dari api jsonplaceholder
-    loadArticlesFromAPI();
-
-    function loadArticlesFromAPI() {
-        $.ajax({
-            url: "https://jsonplaceholder.typicode.com/posts?_limit=6",
-            type: "GET",
-            dataType: "json",
-            success: function (posts) {
-                let container = $("#wadah-artikel-api");
-                container.empty();
-
-                posts.forEach(function (post) {
-                    let cardHtml = `
-                        <div class="article-card">
-                            <div>
-                                <span class="article-badge">Post #${post.id}</span>
-                                <h3 class="article-title">${post.title}</h3>
-                                <p class="article-summary">${post.body}</p>
-                            </div>
-                            <button class="article-read-btn btn-buka-detail-api" data-id="${post.id}">
-                                Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    `;
-                    container.append(cardHtml);
-                });
+                showToast('Pesan berhasil terkirim ke email! Terima kasih.', 'success');
+                form[0].reset();
+                $('#hire-char-count').text('0 / 5,000');
+                closeHireModal();
             },
             error: function () {
-                $("#wadah-artikel-api").html(
-                    '<p style="grid-column: 1/-1; text-align: center; color: var(--sale); padding: 40px 0;"><i class="fa-solid fa-triangle-exclamation"></i> Gagal memuat dari API. Pastikan terhubung ke internet.</p>'
-                );
+                showToast('Gagal mengirim pesan. Silakan coba lagi nanti.', 'error');
             },
-        });
-    }
-
-    // modal detail artikel
-    $(document).on("click", ".btn-buka-detail-api", function (e) {
-        e.preventDefault();
-        let postId = $(this).attr("data-id");
-
-        $("#api-post-id").text("...");
-        $("#api-post-title").text("Memuat...");
-        $("#api-post-body").text("Mengambil isi artikel...");
-
-        $("#modal-artikel-api")
-            .css("display", "flex")
-            .hide()
-            .fadeIn(250, function () {
-                $(this).find(".modal-card").slideDown(350);
-            });
-        $("body").css("overflow", "hidden");
-
-        $.ajax({
-            url: `https://jsonplaceholder.typicode.com/posts/${postId}`,
-            type: "GET",
-            dataType: "json",
-            success: function (post) {
-                $("#api-post-id").text(post.id);
-                $("#api-post-title").text(post.title);
-                $("#api-post-body").text(post.body);
-            },
-            error: function () {
-                $("#api-post-title").text("Error!");
-                $("#api-post-body").text("Gagal mengambil detail artikel.");
-            },
+            complete: function () {
+                submitBtn.prop('disabled', false).removeClass('opacity-70 cursor-not-allowed').html('Send Message <i class="fa-regular fa-paper-plane text-sm"></i>');
+            }
         });
     });
 
-    // tutup modal artikel
-    $("#tombol-tutup-artikel-api, #btn-tutup-detail-api").click(function () {
-        closeAPIModal();
-    });
-
-    $("#modal-artikel-api").click(function (e) {
-        if ($(e.target).hasClass("modal-overlay")) {
-            closeAPIModal();
-        }
-    });
-
-    function closeAPIModal() {
-        let modal = $("#modal-artikel-api");
-        modal.find(".modal-card").slideUp(250, function () {
-            modal.fadeOut(200, function () {
-                $("body").css("overflow", "auto");
-            });
-        });
-    }
-
-    // fungsi toast
+    // Toast notification
     function showToast(message, type = 'success') {
-        let container = $('#toast-container');
-        let icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
-        let toastClass = type === 'success' ? 'toast-success' : 'toast-error';
+        const container = $('#toast-container');
+        const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+        const toastClass = type === 'success' ? 'toast-success' : 'toast-error';
 
-        let toast = $(`
+        const toast = $(`
             <div class="toast ${toastClass}">
                 <i class="fa-solid ${icon}"></i>
                 <span>${message}</span>
@@ -442,7 +289,6 @@ $(document).ready(function () {
 
         container.append(toast);
 
-        // hapus otomatis
         setTimeout(function () {
             toast.css('animation', 'toast-out 0.4s ease forwards');
             setTimeout(function () {
@@ -450,4 +296,91 @@ $(document).ready(function () {
             }, 400);
         }, 4000);
     }
+
+    // ===== GSAP HERO KINETIC TEXT ANIMATION =====
+    function initHeroTextAnimation() {
+        const title = document.getElementById('hero-title');
+        if (!title || typeof gsap === 'undefined') return;
+
+        const chars = title.querySelectorAll('.hero-char');
+        const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*#%&!?';
+
+        function playEntrance() {
+            const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+            chars.forEach((char, index) => {
+                const finalChar = char.getAttribute('data-char') || char.textContent;
+                const randomRot = (Math.random() - 0.5) * 36; // -18deg s/d +18deg
+
+                // reset state
+                gsap.set(char, {
+                    opacity: 0,
+                    y: 65,
+                    scale: 0.25,
+                    rotation: randomRot,
+                    color: '#faf9f5'
+                });
+
+                // animate in with stagger
+                tl.to(char, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    rotation: 0,
+                    duration: 0.8,
+                    ease: 'back.out(2.4)',
+                    onStart: function () {
+                        // scramble effect
+                        let iterations = 0;
+                        const maxIterations = 4;
+                        const interval = setInterval(() => {
+                            if (iterations < maxIterations) {
+                                char.textContent = scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                                iterations++;
+                            } else {
+                                char.textContent = finalChar;
+                                clearInterval(interval);
+                            }
+                        }, 35);
+                    }
+                }, index * 0.04);
+            });
+        }
+
+        // Jalankan intro animation saat pertama kali load
+        playEntrance();
+
+        // Interactive hover physics per character
+        chars.forEach((char) => {
+            char.addEventListener('mouseenter', function () {
+                gsap.killTweensOf(this);
+                const jumpRot = (Math.random() - 0.5) * 28;
+                gsap.timeline()
+                    .to(this, {
+                        y: -22,
+                        scale: 1.22,
+                        rotation: jumpRot,
+                        color: '#60a5fa',
+                        duration: 0.16,
+                        ease: 'power2.out'
+                    })
+                    .to(this, {
+                        y: 0,
+                        scale: 1,
+                        rotation: 0,
+                        color: '#faf9f5',
+                        duration: 0.75,
+                        ease: 'elastic.out(1.4, 0.35)'
+                    });
+            });
+        });
+
+        // Klik judul untuk putar ulang animasi
+        title.addEventListener('click', function () {
+            playEntrance();
+        });
+    }
+
+    // Jalankan inisialisasi GSAP
+    initHeroTextAnimation();
 });

@@ -3,208 +3,606 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Aditya Nugraha — Portofolio (Struktur HTML)</title>
+    <meta name="description" content="Portofolio Ahmad Aditya Nugraha — Kreator visual, pembuat film, dan desainer grafis">
+    <title>Ahmad Aditya Nugraha — Portofolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#111111',
+                        canvas: '#ffffff',
+                        'soft-cloud': '#f5f5f5',
+                        charcoal: '#39393b',
+                        ash: '#4b4b4d',
+                        mute: '#707072',
+                        stone: '#9e9ea0',
+                        hairline: '#cacacb',
+                        'hairline-soft': '#e5e5e5',
+                        sale: '#d30005',
+                        'sale-deep': '#780700',
+                        success: '#007d48',
+                        'success-bright': '#1eaa52',
+                        info: '#1151ff',
+                        electric: '#2563eb',
+                        'electric-dark': '#1d4ed8',
+                        'electric-light': '#eff6ff',
+                    },
+                    fontFamily: {
+                        display: ['Anton', 'sans-serif'],
+                        hero: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'sm': '18px',
+                        'md': '24px',
+                        'lg': '30px',
+                    },
+                    transitionTimingFunction: {
+                        'smooth': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-
     <!-- navigasi utama -->
-    <header>
-        <div>
-            <!-- logo -->
-            <a href="#">
-                <strong>PORTFOLIO</strong>
-            </a>
+    <header class="sticky top-0 left-0 w-full z-[100] bg-canvas h-[60px] flex items-center border-b border-hairline-soft transition-all duration-350 ease-smooth" id="primary-nav">
+        <div class="w-full max-w-[1440px] mx-auto px-6 flex justify-between items-center">
 
-            <!-- menu navigasi -->
-            <nav>
-                <ul>
-                    <li><a href="#beranda">Beranda</a></li>
-                    <li><a href="#tentang">Tentang Saya</a></li>
-                    <li><a href="#portofolio">Portofolio</a></li>
-                    <li><a href="#dukungan">Dukungan</a></li>
+            <nav class="flex-grow flex justify-center max-md:fixed max-md:top-[60px] max-md:left-0 max-md:w-full max-md:bg-canvas max-md:border-b max-md:border-hairline-soft max-md:py-6 max-md:hidden max-md:z-[99]" id="nav-center">
+                <ul class="flex gap-6 max-md:flex-col max-md:items-center max-md:gap-6">
+                    <li><a href="#beranda" class="nav-link text-base font-medium text-ink hover:text-mute active" id="link-beranda">Beranda</a></li>
+                    <li><a href="#tentang" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-tentang">Tentang</a></li>
+                    <li><a href="#experience" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-experience">Experience</a></li>
+                    <li><a href="#portofolio" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-portofolio">Portofolio</a></li>
+                    <li><a href="#contact" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-contact">Contact Us</a></li>
                 </ul>
             </nav>
 
-            <!-- tombol aksi -->
-            <div>
-                <a href="crud.php">Tambah Portofolio</a>
+            <div class="flex items-center gap-3">
+                <button class="hidden max-md:flex w-10 h-10 rounded-full bg-soft-cloud text-ink text-lg items-center justify-center transition-all duration-200" id="toggle-menu" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
-
     <main>
-
-        <!-- bagian hero -->
-        <section id="beranda">
-            <div>
-                <h1>ADITYA NUGRAHA</h1>
-                <p>Mahasiswa UNS · Kreator Visual & Pembuat Film</p>
-                <div>
-                    <a href="#portofolio">Lihat Karya</a>
-                    <a href="#dukungan">Beri Dukungan</a>
-                </div>
+        <!-- beranda -->
+        <section id="beranda" class="relative min-h-[100vh] bg-ink flex items-center justify-center parallax-hero">
+            <!-- decorative bg -->
+            <div class="absolute inset-0 z-[1] pointer-events-none">
+                <div class="absolute top-[15%] right-[10%] w-32 h-32 rounded-full border border-[rgba(255,255,255,0.04)]"></div>
+                <div class="absolute top-[60%] left-[8%] w-48 h-48 rounded-full border border-[rgba(255,255,255,0.03)]"></div>
             </div>
-        </section>
+            <!-- bottom gradient -->
+            <div class="absolute bottom-0 left-0 w-full h-[250px] bg-gradient-to-t from-ink to-transparent z-[1] pointer-events-none"></div>
 
-        <!-- bagian tentang saya -->
-        <section id="tentang">
-            <div>
-                <h2>TENTANG SAYA</h2>
-                <p>
-                    Halo! Saya Ahmad Aditya Nugraha. Saya adalah seorang mahasiswa UNS jurusan Informatika angkatan 2024 yang memiliki minat pada bidang kreator visual, pembuat film, dan desainer grafis. Saya suka menggabungkan keindahan estetika dengan fungsionalitas untuk menceritakan kisah yang memikat.
-                </p>
-                <p>
-                    Dengan ketertarikan mendalam dalam dunia sinematografi dan desain visual, saya telah menyutradarai beberapa proyek film pendek yang berhasil meraih penghargaan di kompetisi tingkat provinsi.
-                </p>
-
-                <!-- daftar penghargaan -->
-                <div>
-                    <h3>Penghargaan Utama</h3>
-                    <ul>
-                        <li>
-                            <span>2023</span>
-                            <strong>Juara 3 Film Pendek FLS2N</strong>
-                            <p>Tingkat Provinsi Jawa Timur — "Jemari Usang"</p>
-                        </li>
-                        <li>
-                            <span>2022</span>
-                            <strong>Juara 2 Film Pendek FLS2N</strong>
-                            <p>Tingkat Provinsi Jawa Timur — "Warisan"</p>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- statistik -->
-                <div>
-                    <div>
-                        <strong>3+</strong>
-                        <span>Tahun Pengalaman</span>
-                    </div>
-                    <div>
-                        <strong>12+</strong>
-                        <span>Proyek Selesai</span>
-                    </div>
-                    <div>
-                        <strong>2×</strong>
-                        <span>Pemenang FLS2N</span>
-                    </div>
-                    <div>
-                        <strong>100%</strong>
-                        <span>Semangat</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- bagian portofolio -->
-        <section id="portofolio">
-            <div>
-                <h2>PORTOFOLIO</h2>
-
-                <!-- kategori chips -->
-                <div>
-                    <button>Semua</button>
-                    <button>Film & Video</button>
-                    <button>Desain Grafis</button>
-                    <button>Kepanitiaan</button>
-                </div>
-
-                <!-- grid karya -->
-                <div>
-                    <!-- karya 1 -->
-                    <article>
-                        <img src="./img/jemariusang.jpg" alt="Jemari Usang">
-                        <span>Film Pendek</span>
-                        <h3>Jemari Usang</h3>
-                        <p>Film & Video</p>
-                        <p>🏆 Juara 3 FLS2N Provinsi Jawa Timur 2023</p>
-                        <button>Lihat Detail</button>
-                    </article>
-
-                    <!-- karya 2 -->
-                    <article>
-                        <img src="./img/warisan.jpg" alt="Warisan">
-                        <span>Film Pendek</span>
-                        <h3>Warisan</h3>
-                        <p>Film & Video</p>
-                        <p>🏆 Juara 2 FLS2N Provinsi Jawa Timur 2022</p>
-                        <button>Lihat Detail</button>
-                    </article>
-
-                    <!-- karya 3 -->
-                    <article>
-                        <img src="./img/aftermovie.jpg" alt="Aftermovie">
-                        <span>Videografi</span>
-                        <h3>Aftermovie Event</h3>
-                        <p>Film & Video</p>
-                        <p>🎥 Aftermovie Production</p>
-                        <button>Lihat Detail</button>
-                    </article>
-
-                    <!-- karya 4 -->
-                    <article>
-                        <img src="./img/gif.jpg" alt="PKKMB 2025">
-                        <span>Grafis Bergerak</span>
-                        <h3>PKKMB 2025 Animation</h3>
-                        <p>Desain Grafis</p>
-                        <p>⚡ Official Media Asset</p>
-                        <button>Lihat Detail</button>
-                    </article>
-
-                    <!-- karya 5 -->
-                    <article>
-                        <img src="./img/stud1.jpg" alt="STUDEX Branding">
-                        <span>Desain Grafis</span>
-                        <h3>STUDEX Branding</h3>
-                        <p>Desain Grafis</p>
-                        <p>✨ Visual Branding</p>
-                        <button>Lihat Detail</button>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- bagian artikel terbaru dari api -->
-        <section id="artikel-api">
-            <div>
-                <h2>ARTIKEL TERBARU</h2>
-                <p>Dimuat secara dinamis via AJAX dari REST API publik</p>
-                <div>
-                    <p>Memuat artikel...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- bagian dukungan -->
-        <section id="dukungan">
-            <div>
-                <h2>BERIKAN DUKUNGAN</h2>
-                <p>Tinggalkan pesan dukungan, kesan, atau kritik membangun.</p>
-
-                <!-- form kirim pesan -->
-                <div>
-                    <form>
-                        <div>
-                            <label for="nama-dukungan">Nama Lengkap</label>
-                            <input type="text" id="nama-dukungan" name="name" placeholder="Masukkan nama Anda" required>
+            <!-- content layer -->
+            <div class="relative z-[2] w-full max-w-[1440px] mx-auto px-6">
+                <div class="w-full">
+                    <h1 id="hero-title" class="font-hero font-black text-[clamp(44px,8.8vw,136px)] leading-[0.88] tracking-[-0.04em] text-[#faf9f5] mb-12 select-none cursor-pointer" aria-label="Ahmad aditya Nugraha" title="Klik untuk putar ulang animasi">
+                        <div class="hero-line flex flex-wrap items-baseline">
+                            <span class="inline-flex">
+                                <span class="hero-char" data-char="A">A</span>
+                                <span class="hero-char" data-char="h">h</span>
+                                <span class="hero-char" data-char="m">m</span>
+                                <span class="hero-char" data-char="a">a</span>
+                                <span class="hero-char" data-char="d">d</span>
+                            </span>
+                            <span class="hero-space inline-block w-[0.26em]">&nbsp;</span>
+                            <span class="inline-flex">
+                                <span class="hero-char" data-char="a">a</span>
+                                <span class="hero-char" data-char="d">d</span>
+                                <span class="hero-char" data-char="i">i</span>
+                                <span class="hero-char" data-char="t">t</span>
+                                <span class="hero-char" data-char="y">y</span>
+                                <span class="hero-char" data-char="a">a</span>
+                            </span>
                         </div>
-                        <div>
-                            <label for="email-dukungan">Alamat Email</label>
-                            <input type="email" id="email-dukungan" name="email" placeholder="contoh@mail.com" required>
+                        <div class="hero-line flex flex-wrap items-baseline mt-1 sm:mt-2">
+                            <span class="hidden sm:inline-flex invisible select-none pointer-events-none" aria-hidden="true">
+                                <span>Ahmad</span>
+                                <span class="inline-block w-[0.26em]">&nbsp;</span>
+                                <span>aditya</span>
+                                <span class="inline-block w-[0.18em]">&nbsp;</span>
+                            </span>
+                            <span class="inline-flex pl-4 sm:pl-0">
+                                <span class="hero-char" data-char="N">N</span>
+                                <span class="hero-char" data-char="u">u</span>
+                                <span class="hero-char" data-char="g">g</span>
+                                <span class="hero-char" data-char="r">r</span>
+                                <span class="hero-char" data-char="a">a</span>
+                                <span class="hero-char" data-char="h">h</span>
+                                <span class="hero-char" data-char="a">a</span>
+                            </span>
                         </div>
-                        <div>
-                            <label for="pesan-dukungan">Kata-kata Pendukung</label>
-                            <textarea id="pesan-dukungan" name="message" placeholder="Tuliskan pesan penyemangat..." required></textarea>
-                        </div>
-                        <button type="submit">Kirim Dukungan</button>
-                    </form>
+                    </h1>
+                    <div class="flex gap-3 flex-wrap max-md:flex-col">
+                        <a href="#portofolio" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-base font-medium leading-normal cursor-pointer transition-all duration-350 ease-smooth bg-electric text-white hover:bg-electric-dark hover:scale-[1.02] active:scale-[0.97] active:opacity-90 max-md:w-full shadow-lg shadow-electric/25" id="tombol-lihat-karya">
+                            Lihat Karya <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-base font-medium leading-normal cursor-pointer transition-all duration-350 ease-smooth border border-canvas text-canvas hover:bg-canvas hover:text-ink hover:scale-[1.02] active:scale-[0.97] active:opacity-80 max-md:w-full" id="tombol-contact">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- tentang saya -->
+        <section id="tentang" class="py-24 max-md:py-16">
+            <div class="w-full max-w-[1440px] mx-auto px-6">
+                <div class="mb-12 fade-in-up">
+                    <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-2">TENTANG SAYA</h2>
                 </div>
 
-                <!-- daftar pesan dukungan terkini -->
-                <div>
-                    <h3>Pesan Terbaru</h3>
-                    <div>
-                        <p>Belum ada pesan dukungan.</p>
+                <div class="grid grid-cols-[1.3fr_1fr] gap-12 items-start max-lg:grid-cols-1 max-lg:gap-8">
+                    <div class="about-text fade-in-up">
+                        <p class="text-base text-charcoal leading-relaxed mb-5">
+                            Halo! Saya <strong>Ahmad Aditya Nugraha</strong>. Saya adalah seorang mahasiswa UNS jurusan Informatika angkatan 2024 yang memiliki minat pada bidang kreator visual, pembuat film, dan desainer grafis. Saya suka menggabungkan keindahan estetika dengan fungsionalitas untuk menceritakan kisah yang memikat.
+                        </p>
+                        <p class="text-base text-charcoal leading-relaxed mb-5">
+                            Dengan ketertarikan mendalam dalam dunia sinematografi dan desain visual, saya telah menyutradarai beberapa proyek film pendek yang berhasil meraih penghargaan di kompetisi tingkat provinsi.
+                        </p>
+
+                        <div class="mt-[30px] pt-6 border-t border-hairline">
+                            <h3 class="font-body text-base font-semibold text-ink mb-6 flex items-center gap-2"><i class="fa-solid fa-trophy text-electric"></i> Penghargaan Utama</h3>
+                            <div class="relative pl-6 border-l-2 border-hairline flex flex-col gap-6">
+                                <div class="relative">
+                                    <div class="absolute left-[-33px] top-1 w-4 h-4 rounded-full bg-canvas border-3 border-electric"></div>
+                                    <div class="timeline-content">
+                                        <span class="text-xs font-semibold text-mute uppercase tracking-[0.5px] mb-1 inline-block">2023</span>
+                                        <h4 class="text-base font-semibold text-ink mb-0.5">Juara 3 Film Pendek FLS2N</h4>
+                                        <p class="text-sm text-mute">Tingkat Provinsi Jawa Timur — <strong>"Jemari Usang"</strong></p>
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute left-[-33px] top-1 w-4 h-4 rounded-full bg-canvas border-3 border-electric"></div>
+                                    <div class="timeline-content">
+                                        <span class="text-xs font-semibold text-mute uppercase tracking-[0.5px] mb-1 inline-block">2022</span>
+                                        <h4 class="text-base font-semibold text-ink mb-0.5">Juara 2 Film Pendek FLS2N</h4>
+                                        <p class="text-sm text-mute">Tingkat Provinsi Jawa Timur — <strong>"Warisan"</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 fade-in-up" data-delay="200">
+                        <div class="bg-soft-cloud py-6 px-[18px] text-center transition-all duration-200 hover:bg-ink group">
+                            <span class="block font-display text-[42px] font-normal text-ink leading-none mb-1 transition-all duration-200 group-hover:text-canvas" data-count="3" data-suffix="+">0</span>
+                            <span class="text-xs font-medium text-mute uppercase tracking-[0.5px] transition-all duration-200 group-hover:text-canvas">Tahun Pengalaman</span>
+                        </div>
+                        <div class="bg-soft-cloud py-6 px-[18px] text-center transition-all duration-200 hover:bg-ink group">
+                            <span class="block font-display text-[42px] font-normal text-ink leading-none mb-1 transition-all duration-200 group-hover:text-canvas" data-count="12" data-suffix="+">0</span>
+                            <span class="text-xs font-medium text-mute uppercase tracking-[0.5px] transition-all duration-200 group-hover:text-canvas">Proyek Selesai</span>
+                        </div>
+                        <div class="bg-soft-cloud py-6 px-[18px] text-center transition-all duration-200 hover:bg-ink group">
+                            <span class="block font-display text-[42px] font-normal text-ink leading-none mb-1 transition-all duration-200 group-hover:text-canvas" data-count="2" data-suffix="×">0</span>
+                            <span class="text-xs font-medium text-mute uppercase tracking-[0.5px] transition-all duration-200 group-hover:text-canvas">Pemenang FLS2N</span>
+                        </div>
+                        <div class="bg-soft-cloud py-6 px-[18px] text-center transition-all duration-200 hover:bg-ink group">
+                            <span class="block font-display text-[42px] font-normal text-ink leading-none mb-1 transition-all duration-200 group-hover:text-canvas" data-count="100" data-suffix="%">0</span>
+                            <span class="text-xs font-medium text-mute uppercase tracking-[0.5px] transition-all duration-200 group-hover:text-canvas">Semangat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- experience -->
+        <section id="experience" class="py-24 max-md:py-16 bg-soft-cloud/30 border-t border-hairline-soft">
+            <div class="w-full max-w-[1440px] mx-auto px-6">
+                <div class="mb-14 fade-in-up">
+                    <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-2">EXPERIENCE</h2>
+                    <p class="text-base text-mute max-w-[600px] leading-normal">Perjalanan kepemimpinan, industri kreatif, organisasi kemahasiswaan, dan manajemen acara.</p>
+                </div>
+
+                <div class="flex flex-col gap-12">
+                    <!-- 2026 -->
+                    <div class="fade-in-up">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="font-display text-2xl sm:text-3xl text-ink tracking-wider">2026</span>
+                            <div class="h-px bg-hairline-soft flex-grow"></div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            <!-- Founder & Marketing Public Relations — PortaPic -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Entrepreneurship</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Founder & Marketing Public Relations</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">PortaPic • Feb 2026 – Sekarang</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Mendirikan dan memimpin PortaPic sebagai penyedia layanan dokumentasi instan dan mobile photobooth adaptif di Solo Raya.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Merancang strategi pemasaran, perencanaan konten berkala, serta memimpin negosiasi dan kesepakatan kemitraan acara.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Menteri Bisnis dan Kemitraan — BEM FATISDA UNS -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Organization</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Menteri Bisnis dan Kemitraan</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">BEM FATISDA UNS • Feb 2026 – Sekarang</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Memimpin departemen dan mendelegasikan tanggung jawab program kerja staf secara strategis.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Menginisiasi program kerja penjualan baru serta mengawal eksekusi program intensif setiap bulan.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Koordinator Public Relations — P!ngfest 2026 -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Organization</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Koordinator Public Relations</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">P!ngfest 2026 • Mei 2026 – Sekarang</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Merancang strategi dan content planning publikasi acara secara terintegrasi.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Mengembangkan konsep serta rincian program Goes to School dan memimpin kampanye promosi lintas lokasi.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Asisten Praktikum Metode Numerik -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Academic</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Asisten Praktikum Metode Numerik</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">Informatika UNS • Agu 2026 – Sekarang</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Membimbing mahasiswa dalam pemahaman algoritma aproksimasi numerik dan implementasi komputasi matematis.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Mengelola pelaksanaan praktikum laboratorium, asistensi tugas kode, dan evaluasi hasil belajar mahasiswa.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Asisten Praktikum Sistem Digital -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Academic</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Asisten Praktikum Sistem Digital</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">Informatika UNS • Agu 2026 – Sekarang</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Mendampingi jalannya praktikum perancangan sirkuit logika, gerbang digital, dan simulasi hardware.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Membimbing troubleshooting implementasi rangkaian logis dan memvalidasi penugasan berkala mahasiswa.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2025 -->
+                    <div class="fade-in-up">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="font-display text-2xl sm:text-3xl text-ink tracking-wider">2025</span>
+                            <div class="h-px bg-hairline-soft flex-grow"></div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            <!-- Staff Creative & Liaison Officer (LO) — P!ngfest 2025 -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Organization</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Staff Creative & Liaison Officer (LO)</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">P!ngfest 2025 • Mei – Okt 2025</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Mengawal dokumentasi visual acara serta produksi foto resmi kepanitiaan.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Menjadi garda terdepan perjalanan VVIP: mulai dari penjemputan bandara, navigasi Solo, hingga pendampingan mobilitas penuh.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Staff Media & Publikasi — PKKMB FATISDA UNS 2025 -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Organization</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Staff Media & Publikasi</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">PKKMB FATISDA UNS 2025 • Mei – Agu 2025</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Memproduksi aset visual utama, termasuk video aftermovie dan konten visual videotron.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Melakukan dokumentasi fotografi dan videografi seluruh rangkaian kegiatan.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Visual Branding Specialist — StudEX (Freelance) -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Freelance</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Visual Branding Specialist</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">StudEX • Jun – Agu 2025</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Merancang identitas dan visual branding untuk kurasi konten media sosial (Instagram Feed).</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2024 -->
+                    <div class="fade-in-up">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="font-display text-2xl sm:text-3xl text-ink tracking-wider">2024</span>
+                            <div class="h-px bg-hairline-soft flex-grow"></div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            <!-- Intern Media & Komunikasi — BEM FATISDA UNS -->
+                            <div class="bg-canvas border border-hairline-soft rounded-2xl p-6 hover:border-electric/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="mb-3">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-soft-cloud text-ink border border-hairline-soft">Internship</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-ink leading-snug mb-1.5 font-body">Intern Media & Komunikasi</h3>
+                                    <p class="text-xs sm:text-sm font-medium text-mute mb-4">BEM FATISDA UNS • Nov – Des 2024</p>
+                                    <ul class="space-y-2 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-electric font-bold text-base leading-none mt-0.5">•</span>
+                                            <span>Berperan sebagai host podcast resmi serta memproduksi aset identitas visual untuk kanal YouTube.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- portofolio (horizontal scroll on vertical scroll) -->
+        <section id="portofolio" class="relative h-[260vh]">
+            <div class="sticky top-[60px] h-fit max-h-[calc(100vh-60px)] flex flex-col justify-start overflow-hidden pt-4 pb-2" id="portfolio-sticky">
+                <div class="w-full max-w-[1440px] mx-auto px-6 mb-4">
+                    <div class="flex justify-between items-end gap-4 flex-wrap">
+                        <div>
+                            <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-1">PORTOFOLIO</h2>
+                            <p class="text-sm text-mute">Scroll ke bawah untuk menggeser karya &rarr;</p>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <button class="filter-chip active bg-canvas border border-hairline text-ink px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 hover:border-ink" data-filter="all" id="filter-semua">Semua</button>
+                            <button class="filter-chip bg-canvas border border-hairline text-ink px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 hover:border-ink" data-filter="film" id="filter-film">Film & Video</button>
+                            <button class="filter-chip bg-canvas border border-hairline text-ink px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 hover:border-ink" data-filter="design" id="filter-desain">Desain Grafis</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full overflow-hidden">
+                    <div class="portfolio-track flex gap-8 px-6 will-change-transform" id="portfolio-track">
+                        <!-- Jemari Usang -->
+                        <div class="portfolio-card product-card shrink-0 w-[85vw] max-w-[720px] bg-canvas border border-hairline p-6 md:p-8" data-category="film">
+                            <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-6 items-center">
+                                <div class="relative w-full aspect-video bg-soft-cloud overflow-hidden">
+                                    <img src="./img/jemariusang.jpg" alt="Jemari Usang" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    <span class="absolute top-3 left-3 bg-canvas/90 backdrop-blur-sm text-electric text-xs font-semibold px-3 py-1 border border-electric/30">Film Pendek</span>
+                                </div>
+                                <div class="flex flex-col justify-between h-full py-1">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                            <span class="text-xs font-semibold text-mute uppercase tracking-wider">Film & Video</span>
+                                            <span class="text-xs text-hairline">•</span>
+                                            <span class="text-xs font-semibold text-ink">🏆 Juara 3 FLS2N Jatim 2023</span>
+                                        </div>
+                                        <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-3 leading-none">Jemari Usang</h3>
+                                        <p class="text-charcoal text-sm leading-relaxed mb-4">
+                                            Film pendek tentang perjalanan seorang seniman tradisional yang berjuang melestarikan warisan budaya di tengah arus modernisasi.
+                                        </p>
+                                    </div>
+                                    <div class="pt-3 border-t border-hairline-soft flex items-center justify-end">
+                                        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-electric hover:text-electric-dark transition-colors">
+                                            Hubungi Saya <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warisan -->
+                        <div class="portfolio-card product-card shrink-0 w-[85vw] max-w-[720px] bg-canvas border border-hairline p-6 md:p-8" data-category="film">
+                            <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-6 items-center">
+                                <div class="relative w-full aspect-video bg-soft-cloud overflow-hidden">
+                                    <img src="./img/warisan.jpg" alt="Warisan" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    <span class="absolute top-3 left-3 bg-canvas/90 backdrop-blur-sm text-electric text-xs font-semibold px-3 py-1 border border-electric/30">Film Pendek</span>
+                                </div>
+                                <div class="flex flex-col justify-between h-full py-1">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                            <span class="text-xs font-semibold text-mute uppercase tracking-wider">Film & Video</span>
+                                            <span class="text-xs text-hairline">•</span>
+                                            <span class="text-xs font-semibold text-ink">🏆 Juara 2 FLS2N Jatim 2022</span>
+                                        </div>
+                                        <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-3 leading-none">Warisan</h3>
+                                        <p class="text-charcoal text-sm leading-relaxed mb-4">
+                                            Kisah keluarga tentang tradisi yang diwariskan turun-temurun dan tantangan generasi muda untuk menjaga amanah tersebut.
+                                        </p>
+                                    </div>
+                                    <div class="pt-3 border-t border-hairline-soft flex items-center justify-end">
+                                        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-electric hover:text-electric-dark transition-colors">
+                                            Hubungi Saya <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Aftermovie Event -->
+                        <div class="portfolio-card product-card shrink-0 w-[85vw] max-w-[720px] bg-canvas border border-hairline p-6 md:p-8" data-category="film">
+                            <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-6 items-center">
+                                <div class="relative w-full aspect-video bg-soft-cloud overflow-hidden">
+                                    <img src="./img/aftermovie.jpg" alt="Aftermovie Event" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    <span class="absolute top-3 left-3 bg-canvas/90 backdrop-blur-sm text-electric text-xs font-semibold px-3 py-1 border border-electric/30">Videografi</span>
+                                </div>
+                                <div class="flex flex-col justify-between h-full py-1">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                            <span class="text-xs font-semibold text-mute uppercase tracking-wider">Film & Video</span>
+                                            <span class="text-xs text-hairline">•</span>
+                                            <span class="text-xs font-semibold text-ink">🎥 Aftermovie Production</span>
+                                        </div>
+                                        <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-3 leading-none">Aftermovie Event</h3>
+                                        <p class="text-charcoal text-base leading-relaxed mb-4">
+                                            Dokumentasi visual berbagai event kampus dan komunitas yang dikemas dalam bentuk aftermovie yang dinamis dan emosional.
+                                        </p>
+                                    </div>
+                                    <div class="pt-3 border-t border-hairline-soft flex items-center justify-end">
+                                        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-electric hover:text-electric-dark transition-colors">
+                                            Hubungi Saya <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PKKMB 2025 Animation -->
+                        <div class="portfolio-card product-card shrink-0 w-[85vw] max-w-[720px] bg-canvas border border-hairline p-6 md:p-8" data-category="design">
+                            <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-6 items-center">
+                                <div class="relative w-full aspect-video bg-soft-cloud overflow-hidden">
+                                    <img src="./img/gif.jpg" alt="PKKMB 2025 Animation" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    <span class="absolute top-3 left-3 bg-canvas/90 backdrop-blur-sm text-electric text-xs font-semibold px-3 py-1 border border-electric/30">Grafis Bergerak</span>
+                                </div>
+                                <div class="flex flex-col justify-between h-full py-1">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                            <span class="text-xs font-semibold text-mute uppercase tracking-wider">Desain Grafis</span>
+                                            <span class="text-xs text-hairline">•</span>
+                                            <span class="text-xs font-semibold text-ink">⚡ Official Media Asset</span>
+                                        </div>
+                                        <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-3 leading-none">PKKMB 2025 Animation</h3>
+                                        <p class="text-charcoal text-base leading-relaxed mb-4">
+                                            Animasi grafis untuk media resmi PKKMB 2025, menggabungkan motion graphics dengan visual storytelling.
+                                        </p>
+                                    </div>
+                                    <div class="pt-3 border-t border-hairline-soft flex items-center justify-end">
+                                        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-electric hover:text-electric-dark transition-colors">
+                                            Hubungi Saya <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STUDEX Branding -->
+                        <div class="portfolio-card product-card shrink-0 w-[85vw] max-w-[720px] bg-canvas border border-hairline p-6 md:p-8" data-category="design">
+                            <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-6 items-center">
+                                <div class="relative w-full aspect-video bg-soft-cloud overflow-hidden">
+                                    <img src="./img/stud1.jpg" alt="STUDEX Branding" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy">
+                                    <span class="absolute top-3 left-3 bg-canvas/90 backdrop-blur-sm text-electric text-xs font-semibold px-3 py-1 border border-electric/30">Desain Grafis</span>
+                                </div>
+                                <div class="flex flex-col justify-between h-full py-1">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                            <span class="text-xs font-semibold text-mute uppercase tracking-wider">Desain Grafis</span>
+                                            <span class="text-xs text-hairline">•</span>
+                                            <span class="text-xs font-semibold text-ink">✨ Visual Branding</span>
+                                        </div>
+                                        <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-3 leading-none">STUDEX Branding</h3>
+                                        <p class="text-charcoal text-base leading-relaxed mb-4">
+                                            Proyek branding visual untuk STUDEX, menciptakan identitas visual yang kuat dan memorable.
+                                        </p>
+                                    </div>
+                                    <div class="pt-3 border-t border-hairline-soft flex items-center justify-end">
+                                        <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-electric hover:text-electric-dark transition-colors">
+                                            Hubungi Saya <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- contact us -->
+        <section id="contact" class="pt-6 pb-20 sm:pt-10 sm:pb-24 max-md:pt-4 max-md:pb-16 -mt-4 sm:-mt-8 relative z-10">
+            <div class="w-full max-w-[1440px] mx-auto px-6">
+                <div class="mb-8 fade-in-up">
+                    <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-2">CONTACT US</h2>
+                    <p class="text-base text-mute max-w-[600px] leading-normal">Tertarik untuk berkolaborasi atau ingin mendiskusikan sebuah proyek? Hubungi saya kapan saja.</p>
+                </div>
+
+                <div class="max-w-[600px] fade-in-up">
+                    <div class="flex gap-3 flex-wrap">
+                        <button type="button" id="btn-hire-me" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-base font-medium leading-normal cursor-pointer transition-all duration-350 ease-smooth bg-electric text-white hover:bg-electric-dark hover:scale-[1.02] active:scale-[0.97] active:opacity-90 shadow-lg shadow-electric/25">
+                            <i class="fa-solid fa-paper-plane"></i> Hire Me
+                        </button>
+                        <a href="https://www.instagram.com/ahmdaadit/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-base font-medium leading-normal cursor-pointer transition-all duration-350 ease-smooth border border-ink text-ink hover:bg-ink hover:text-canvas hover:scale-[1.02] active:scale-[0.97] active:opacity-80">
+                            <i class="fa-brands fa-instagram"></i> Instagram
+                        </a>
                     </div>
                 </div>
             </div>
@@ -212,12 +610,95 @@
 
     </main>
 
-    <!-- footer halaman -->
-    <footer>
-        <div>
-            <p>© 2025 Ahmad Aditya Nugraha. Praktikum Pemrograman Web — UNS.</p>
-        </div>
-    </footer>
+    <!-- Hire Me / Send a message Modal Overlay -->
+    <div id="hire-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 bg-ink/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="hire-modal-card relative w-full max-w-[620px] max-h-[90vh] overflow-y-auto bg-canvas rounded-2xl p-6 sm:p-8 shadow-2xl scale-95 transition-transform duration-300">
+            <!-- Close Button -->
+            <button type="button" id="btn-close-modal" aria-label="Close form" class="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center text-stone hover:text-ink hover:bg-soft-cloud transition-colors cursor-pointer border-none bg-transparent">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
 
+            <!-- Header -->
+            <div class="mb-6 pr-8">
+                <h3 class="text-2xl sm:text-[26px] font-bold text-ink leading-tight mb-1.5 font-body">Send a message</h3>
+                <p class="text-sm text-mute font-normal">Fill in the form below and I'll get back to you within 24 hours.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="hire-form" novalidate>
+                <!-- Row 1: Name & Email -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
+                    <div>
+                        <label for="hire-name" class="block text-sm font-semibold text-ink mb-1.5">
+                            Your name <span class="text-sale font-bold">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone pointer-events-none">
+                                <i class="fa-regular fa-user text-sm"></i>
+                            </span>
+                            <input type="text" id="hire-name" name="name" required placeholder="Jane Smith"
+                                class="w-full pl-10 pr-3.5 py-2.5 sm:py-3 bg-canvas border border-hairline-soft rounded-xl text-ink placeholder-stone text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="hire-email" class="block text-sm font-semibold text-ink mb-1.5">
+                            Email address <span class="text-sale font-bold">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone pointer-events-none">
+                                <i class="fa-solid fa-at text-sm"></i>
+                            </span>
+                            <input type="email" id="hire-email" name="email" required placeholder="jane@example.com"
+                                class="w-full pl-10 pr-3.5 py-2.5 sm:py-3 bg-canvas border border-hairline-soft rounded-xl text-ink placeholder-stone text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Subject -->
+                <div class="mb-4 sm:mb-5">
+                    <label for="hire-subject" class="block text-sm font-semibold text-ink mb-1.5">
+                        Subject
+                    </label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone pointer-events-none">
+                            <i class="fa-solid fa-book-open text-sm"></i>
+                        </span>
+                        <input type="text" id="hire-subject" name="subject" placeholder="What's this about? (optional)"
+                            class="w-full pl-10 pr-3.5 py-2.5 sm:py-3 bg-canvas border border-hairline-soft rounded-xl text-ink placeholder-stone text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all">
+                    </div>
+                </div>
+
+                <!-- Row 3: Message -->
+                <div>
+                    <label for="hire-message" class="block text-sm font-semibold text-ink mb-1.5">
+                        Message <span class="text-sale font-bold">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-3.5 text-stone pointer-events-none">
+                            <i class="fa-regular fa-comment text-sm"></i>
+                        </span>
+                        <textarea id="hire-message" name="message" required maxlength="5000" rows="4" placeholder="Tell me about your project, idea, or just say hi..."
+                            class="w-full pl-10 pr-3.5 py-3 bg-canvas border border-hairline-soft rounded-xl text-ink placeholder-stone text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all resize-none"></textarea>
+                    </div>
+                    <div class="flex justify-end mt-1 mb-5">
+                        <span id="hire-char-count" class="text-xs text-stone">0 / 5,000</span>
+                    </div>
+                </div>
+
+                <!-- Row 4: Submit Button -->
+                <button type="submit" id="btn-submit-hire"
+                    class="w-full py-3.5 px-6 rounded-xl font-semibold text-white bg-electric hover:bg-electric-dark active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-electric/25 text-base">
+                    Send Message <i class="fa-regular fa-paper-plane text-sm"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- toast notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

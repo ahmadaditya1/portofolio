@@ -1,3 +1,8 @@
+::selection {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
 /* scroll */
 ::-webkit-scrollbar {
     width: 6px;
@@ -11,19 +16,6 @@
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #707072;
-}
-
-/* typing animation */
-.typing-text::after {
-    content: '|';
-    animation: blink 1s step-end infinite;
-    color: #9e9ea0;
-    margin-left: 2px;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
 }
 
 /* error input */
@@ -50,13 +42,32 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #111111;
+    background-color: #2563eb;
     transition: all 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #2563eb !important;
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
+}
+
+/* filter chip */
+.filter-chip.active {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border-color: #2563eb !important;
+}
+.filter-chip:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+.filter-chip.active:hover {
+    color: #ffffff !important;
 }
 
 /* navigasi sel */
@@ -120,4 +131,77 @@
         opacity: 0;
         transform: translateY(20px);
     }
+}
+
+/* ===== PARALLAX HERO ===== */
+.parallax-hero {
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(17,17,17,0.3) 0%, transparent 70%),
+        radial-gradient(ellipse at 80% 20%, rgba(113,113,113,0.15) 0%, transparent 50%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+/* ===== NAVBAR ===== */
+#primary-nav {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+#primary-nav.nav-scrolled {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+/* ===== FADE-IN ON SCROLL ===== */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* stagger delay untuk cards */
+.fade-in-up[data-delay="100"] { transition-delay: 0.1s; }
+.fade-in-up[data-delay="200"] { transition-delay: 0.2s; }
+.fade-in-up[data-delay="300"] { transition-delay: 0.3s; }
+.fade-in-up[data-delay="400"] { transition-delay: 0.4s; }
+
+/* ===== MOBILE: matikan parallax fixed bg ===== */
+@media (max-width: 768px) {
+    .parallax-hero {
+        background-attachment: scroll;
+    }
+}
+
+/* ponytail: native JS scroll-linked horizontal translate. batas: scroll kartu horizontal terhubung ke sumbu vertikal. upgrade ke GSAP ScrollTrigger jika butuh snap otomatis atau scrub timeline multi-layer */
+.portfolio-track {
+    display: flex;
+    will-change: transform;
+    transition: transform 0.08s ease-out;
+    padding-top: 12px;
+    padding-bottom: 24px;
+}
+
+.portfolio-card {
+    background-color: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+/* ===== HERO KINETIC TYPOGRAPHY ===== */
+#hero-title {
+    perspective: 1000px;
+}
+
+.hero-char {
+    display: inline-block;
+    will-change: transform, opacity;
+    user-select: none;
+    cursor: default;
 }
