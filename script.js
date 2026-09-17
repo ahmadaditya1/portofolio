@@ -297,6 +297,26 @@ $(document).ready(function () {
         }, 4000);
     }
 
+    // ===== NUGRAHA ALIGNMENT (posisi setelah akhir aditya) =====
+    function alignNugraha() {
+        const aditya = document.getElementById('word-aditya');
+        const nugrahaLine = document.getElementById('nugraha-line');
+        const titleEl = document.getElementById('hero-title');
+        if (!aditya || !nugrahaLine || !titleEl) return;
+
+        const titleLeft = titleEl.getBoundingClientRect().left;
+        const adityaRight = aditya.getBoundingClientRect().right;
+        const offset = adityaRight - titleLeft;
+        nugrahaLine.style.paddingLeft = offset + 'px';
+    }
+
+    // Run on load, resize, and after fonts settle
+    alignNugraha();
+    window.addEventListener('resize', alignNugraha);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(alignNugraha);
+    }
+
     // ===== GSAP HERO KINETIC TEXT ANIMATION =====
     function initHeroTextAnimation() {
         const title = document.getElementById('hero-title');
@@ -349,6 +369,8 @@ $(document).ready(function () {
 
         // Jalankan intro animation saat pertama kali load
         playEntrance();
+        // Re-align Nugraha setelah animasi selesai
+        setTimeout(alignNugraha, 1200);
 
         // Interactive hover physics per character
         chars.forEach((char) => {
@@ -378,6 +400,7 @@ $(document).ready(function () {
         // Klik judul untuk putar ulang animasi
         title.addEventListener('click', function () {
             playEntrance();
+            setTimeout(alignNugraha, 1200);
         });
     }
 

@@ -94,17 +94,18 @@
             <!-- content layer -->
             <div class="relative z-[2] w-full max-w-[1440px] mx-auto px-6">
                 <div class="w-full">
-                    <h1 id="hero-title" class="font-hero font-black text-[clamp(44px,8.8vw,136px)] leading-[0.88] tracking-[-0.04em] text-[#faf9f5] mb-12 select-none cursor-pointer" aria-label="ahmad aditya Nugraha" title="Klik untuk putar ulang animasi">
-                        <div class="hero-line flex flex-wrap items-baseline">
-                            <span class="inline-flex">
-                                <span class="hero-char" data-char="a">a</span>
+                    <h1 id="hero-title" class="font-hero font-black leading-[0.88] tracking-[-0.04em] text-[#faf9f5] mb-12 select-none cursor-pointer overflow-visible" style="font-size:clamp(44px,8.8vw,136px)" aria-label="Ahmad aditya Nugraha" title="Klik untuk putar ulang animasi">
+                        <!-- baris 1: Ahmad aditya -->
+                        <div class="hero-line flex items-baseline whitespace-nowrap">
+                            <span id="word-ahmad" class="inline-flex">
+                                <span class="hero-char" data-char="A">A</span>
                                 <span class="hero-char" data-char="h">h</span>
                                 <span class="hero-char" data-char="m">m</span>
                                 <span class="hero-char" data-char="a">a</span>
                                 <span class="hero-char" data-char="d">d</span>
                             </span>
                             <span class="hero-space inline-block w-[0.26em]">&nbsp;</span>
-                            <span class="inline-flex">
+                            <span id="word-aditya" class="inline-flex">
                                 <span class="hero-char" data-char="a">a</span>
                                 <span class="hero-char" data-char="d">d</span>
                                 <span class="hero-char" data-char="i">i</span>
@@ -113,14 +114,9 @@
                                 <span class="hero-char" data-char="a">a</span>
                             </span>
                         </div>
-                        <div class="hero-line flex flex-wrap items-baseline mt-1 sm:mt-2">
-                            <span class="hidden sm:inline-flex invisible select-none pointer-events-none" aria-hidden="true">
-                                <span>ahmad</span>
-                                <span class="inline-block w-[0.26em]">&nbsp;</span>
-                                <span>aditya</span>
-                                <span class="inline-block w-[0.18em]">&nbsp;</span>
-                            </span>
-                            <span class="inline-flex pl-4 sm:pl-0">
+                        <!-- baris 2: Nugraha, posisi dinamis persis setelah akhir kata aditya -->
+                        <div id="nugraha-line" class="hero-line flex items-baseline whitespace-nowrap mt-1 sm:mt-2 transition-[padding] duration-150">
+                            <span id="word-nugraha" class="inline-flex">
                                 <span class="hero-char" data-char="N">N</span>
                                 <span class="hero-char" data-char="u">u</span>
                                 <span class="hero-char" data-char="g">g</span>
