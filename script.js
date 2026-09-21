@@ -404,6 +404,285 @@ $(document).ready(function () {
         });
     }
 
+    // ===== CONTACT 3D CARD STACK & TILT =====
+    function initContactCardStack() {
+        const stackWrapper = document.getElementById('contact-card-stack');
+        if (!stackWrapper || typeof gsap === 'undefined') return;
+
+        const card1 = stackWrapper.querySelector('[data-id="1"]');
+        const card2 = stackWrapper.querySelector('[data-id="2"]');
+        const card3 = stackWrapper.querySelector('[data-id="3"]');
+        if (!card1 || !card2 || !card3) return;
+
+        // Slot positions & pull directions:
+        // Card 1: Ahmad (atas / top-left)
+        // Card 2: Aditya (tengah / center)
+        // Card 3: Nugraha (bawah / bottom-right)
+        const cardMap = {
+            1: { el: card1, slot: { left: '6%', top: '6%', baseRot: -2 }, pull: { x: -85, y: -45, rot: -16 } },
+            2: { el: card2, slot: { left: '28%', top: '28%', baseRot: 1.5 }, pull: { x: -80, y: 35, rot: -12 } },
+            3: { el: card3, slot: { left: '50%', top: '50%', baseRot: -1 }, pull: { x: 85, y: 45, rot: 16 } }
+        };
+
+        // Stacking order: [bottom, middle, top]
+        // Posisi awal persis seperti di gambar posisi awal.png:
+        // Card 1 (Ahmad) di paling belakang (zIndex 10)
+        // Card 2 (Aditya) di tengah (zIndex 20)
+        // Card 3 (Nugraha) paling depan (zIndex 30, menindih Card 2 & 1)
+        let stackOrder = [1, 2, 3];
+        const zIndexes = [10, 20, 30];
+
+        // Inisialisasi posisi awal di slot masing-masing
+        [1, 2, 3].forEach((id) => {
+            const item = cardMap[id];
+            gsap.set(item.el, {
+                left: item.slot.left,
+                top: item.slot.top,
+                x: 0,
+                y: 0,
+                rotation: item.slot.baseRot,
+                transformOrigin: 'center center'
+            });
+        });
+
+        // Floating idle animation saat tidak ada interaksi hover
+        const floatTweens = {};
+        function startFloat(id, delay = 0) {
+            const item = cardMap[id];
+            if (floatTweens[id]) floatTweens[id].kill();
+            
+            const durations = { 1: 3.4, 2: 2.8, 3: 3.1 };
+            const amplitudes = { 1: 4, 2: 5, 3: 4 };
+            
+            floatTweens[id] = gsap.to(item.el, {
+                y: `+=${amplitudes[id]}`,
+                duration: durations[id],
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                delay: delay
+            });
+        }
+
+        function stopAllFloats() {
+            [1, 2, 3].forEach(id => {
+                if (floatTweens[id]) floatTweens[id].kill();
+            });
+        }
+
+        function resumeAllFloats() {
+            [1, 2, 3].forEach((id, i) => startFloat(id, i * 0.2));
+        }
+
+        // Terapkan z-index, class visual, dan shadow depth
+        function applyStackClasses() {
+            stackOrder.forEach((id, idx) => {
+                const item = cardMap[id];
+                const z = zIndexes[idx];
+                item.el.style.zIndex = z;
+                if (idx === 2) {
+                    item.el.classList.add('is-front');
+                    item.el.classList.remove('is-behind');
+                } else {
+                    item.el.classList.remove('is-front');
+                    item.el.classList.add('is-behind');
+                }
+            });
+        }
+
+        applyStackClasses();
+        resumeAllFloats();
+
+        // Parameter Fan-out (melebar seperti kipas kartu saat hover area tumpukan)
+        const fanOffsets = {
+            1: { x: -32, y: -24, rot: -8 },
+            2: { x: -6, y: 0, rot: 2 },
+            3: { x: 32, y: 24, rot: 8 }
+        };
+
+        let isHoveringStack = false;
+        let isAnimating = false;
+
+        function applyFanOut() {
+            if (isAnimating) return;
+            stopAllFloats();
+            [1, 2, 3].forEach((id) => {
+                const item = cardMap[id];
+                const fan = fanOffsets[id];
+                gsap.to(item.el, {
+                    x: fan.x,
+                    y: fan.y,
+                    rotation: fan.rot,
+                    duration: 0.38,
+                    ease: 'power2.out',
+                    overwrite: 'auto'
+                });
+            });
+        }
+
+        function resetFanOut() {
+            if (isAnimating) return;
+            [1, 2, 3].forEach((id) => {
+                const item = cardMap[id];
+                gsap.to(item.el, {
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    rotation: item.slot.baseRot,
+                    duration: 0.45,
+                    ease: 'power3.out',
+                    overwrite: 'auto',
+                    onComplete: () => {
+                        if (!isHoveringStack && !isAnimating) {
+                            startFloat(id);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Hover event pada container deck (Kipas melebar saat cursor masuk, merapat saat keluar)
+        stackWrapper.addEventListener('mouseenter', function () {
+            isHoveringStack = true;
+            applyFanOut();
+        });
+
+        stackWrapper.addEventListener('mouseleave', function () {
+            isHoveringStack = false;
+            resetFanOut();
+        });
+
+        // Hover fokus per kartu: kartu yang ditunjuk kursor sedikit terangkat & membesar
+        [1, 2, 3].forEach((id) => {
+            const item = cardMap[id];
+            item.el.addEventListener('mouseenter', function () {
+                if (isAnimating) return;
+                gsap.to(item.el, {
+                    scale: 1.05,
+                    duration: 0.22,
+                    ease: 'power2.out'
+                });
+            });
+            item.el.addEventListener('mouseleave', function () {
+                if (isAnimating) return;
+                gsap.to(item.el, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Animasi mencabut kartu (pull out), menukar z-index, lalu meluncur kembali ke atas tumpukan
+        function bringCardToFront(id) {
+            if (isAnimating) return;
+            isAnimating = true;
+            stopAllFloats();
+
+            const item = cardMap[id];
+
+            // Susun ulang stack: letakkan kartu ini di index teratas (2)
+            stackOrder = stackOrder.filter(x => x !== id);
+            stackOrder.push(id);
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    isAnimating = false;
+                    if (isHoveringStack) {
+                        applyFanOut();
+                    } else {
+                        resetFanOut();
+                    }
+                }
+            });
+
+            // 1. Cabut kartu ke arah luar dengan rotasi dinamis & membesar
+            tl.to(item.el, {
+                x: item.pull.x * 1.1,
+                y: item.pull.y * 1.1,
+                rotation: item.pull.rot,
+                scale: 1.1,
+                duration: 0.26,
+                ease: 'power2.out'
+            })
+            // 2. Di posisi luar, z-index kartu diangkat ke paling depan
+            .add(() => {
+                applyStackClasses();
+            })
+            // 3. Meluncur masuk kembali ke posisi slotnya menindih kartu lain
+            .to(item.el, {
+                x: isHoveringStack ? fanOffsets[id].x : 0,
+                y: isHoveringStack ? fanOffsets[id].y : 0,
+                rotation: isHoveringStack ? fanOffsets[id].rot : item.slot.baseRot,
+                scale: isHoveringStack ? 1.05 : 1,
+                duration: 0.42,
+                ease: 'back.out(1.6)'
+            });
+        }
+
+        // Jika kartu yang sedang paling depan diklik, selipkan ke belakang deck
+        function sendFrontCardToBack() {
+            if (isAnimating) return;
+            isAnimating = true;
+            stopAllFloats();
+
+            const frontId = stackOrder[2];
+            const item = cardMap[frontId];
+
+            // Putar antrean: kartu depan pindah ke paling belakang
+            stackOrder.unshift(stackOrder.pop());
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    isAnimating = false;
+                    if (isHoveringStack) {
+                        applyFanOut();
+                    } else {
+                        resetFanOut();
+                    }
+                }
+            });
+
+            // Cabut kartu keluar sedikit
+            tl.to(item.el, {
+                x: item.pull.x * 0.8,
+                y: item.pull.y * 0.8,
+                rotation: item.pull.rot * 0.8,
+                scale: 1.04,
+                duration: 0.22,
+                ease: 'power2.out'
+            })
+            // Turunkan z-index ke belakang
+            .add(() => {
+                applyStackClasses();
+            })
+            // Selipkan kembali ke belakang tumpukan
+            .to(item.el, {
+                x: isHoveringStack ? fanOffsets[frontId].x : 0,
+                y: isHoveringStack ? fanOffsets[frontId].y : 0,
+                rotation: isHoveringStack ? fanOffsets[frontId].rot : item.slot.baseRot,
+                scale: 1,
+                duration: 0.36,
+                ease: 'power2.out'
+            });
+        }
+
+        // Click handler per card
+        [1, 2, 3].forEach((id) => {
+            const item = cardMap[id];
+            item.el.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const currentIdx = stackOrder.indexOf(id);
+                if (currentIdx === 2) {
+                    sendFrontCardToBack();
+                } else {
+                    bringCardToFront(id);
+                }
+            });
+        });
+    }
+
     // Jalankan inisialisasi GSAP
     initHeroTextAnimation();
+    initContactCardStack();
 });

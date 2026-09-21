@@ -205,3 +205,41 @@
     user-select: none;
     cursor: default;
 }
+
+/* ===== CONTACT CARD STACK (FAN & SHUFFLE) ===== */
+.card-stack-wrapper {
+    position: relative;
+}
+
+.contact-card {
+    position: absolute;
+    width: 50%;
+    border-radius: 14px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform, filter;
+    transition: filter 0.35s ease;
+}
+
+.contact-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    pointer-events: none;
+}
+
+.contact-card.is-front {
+    filter: brightness(1) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
+}
+
+.contact-card.is-behind {
+    filter: brightness(0.92) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+}
+
+.contact-card:hover {
+    filter: brightness(1.02) drop-shadow(0 24px 36px rgba(37, 99, 235, 0.25));
+}
+
