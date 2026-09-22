@@ -32,7 +32,7 @@
 .nav-link {
     position: relative;
     padding: 4px 0;
-    transition: all 0.2s ease;
+    transition: color 0.25s ease;
 }
 
 .nav-link::after {
@@ -42,13 +42,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #2563eb;
-    transition: all 0.2s ease;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: #2563eb !important;
+    transition: width 0.2s ease, background-color 0.25s ease;
 }
 
 .nav-link:hover::after,
@@ -133,25 +127,135 @@
     }
 }
 
-/* ===== PARALLAX HERO ===== */
-.parallax-hero {
-    background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(17,17,17,0.3) 0%, transparent 70%),
-        radial-gradient(ellipse at 80% 20%, rgba(113,113,113,0.15) 0%, transparent 50%);
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+/* ===== FLOATING DYNAMIC ISLAND NAVBAR ===== */
+#primary-nav {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ===== NAVBAR ===== */
-#primary-nav {
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+.nav-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    user-select: none;
 }
-#primary-nav.nav-scrolled {
-    background-color: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+
+.mobile-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* --- Theme Dark (Hero / Beranda - Menyatu tanpa border/box/pill) --- */
+#primary-nav.nav-dark {
+    background-color: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+#primary-nav.nav-dark #nav-brand {
+    color: #ffffff;
+}
+#primary-nav.nav-dark .nav-pill {
+    color: rgba(250, 249, 245, 0.7);
+    background-color: transparent;
+}
+#primary-nav.nav-dark .nav-pill:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+#primary-nav.nav-dark .nav-pill.active {
+    color: #ffffff;
+    background-color: transparent;
+    font-weight: 600;
+}
+#primary-nav.nav-dark #nav-cta {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+#primary-nav.nav-dark #nav-cta:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+#primary-nav.nav-dark #toggle-menu {
+    background-color: transparent;
+    color: #faf9f5;
+}
+#primary-nav.nav-dark #toggle-menu:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#mobile-menu-box.box-dark {
+    background-color: rgba(22, 22, 24, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+#mobile-menu-box.box-dark .mobile-nav-item {
+    color: rgba(250, 249, 245, 0.75);
+}
+#mobile-menu-box.box-dark .mobile-nav-item:hover,
+#mobile-menu-box.box-dark .mobile-nav-item.active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Theme Light (Section Berlatar Putih) --- */
+#primary-nav.nav-light {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+#primary-nav.nav-light #nav-brand {
+    color: #111111;
+}
+#primary-nav.nav-light .nav-pill {
+    color: #707072;
+}
+#primary-nav.nav-light .nav-pill:hover {
+    color: #111111;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+#primary-nav.nav-light .nav-pill.active {
+    color: #111111;
+    background-color: rgba(0, 0, 0, 0.06);
+    font-weight: 600;
+}
+#primary-nav.nav-light #nav-cta {
+    background-color: #111111;
+    color: #ffffff;
+}
+#primary-nav.nav-light #nav-cta:hover {
+    background-color: #2563eb;
+}
+#primary-nav.nav-light #toggle-menu {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #111111;
+}
+#primary-nav.nav-light #toggle-menu:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+#mobile-menu-box.box-light {
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+#mobile-menu-box.box-light .mobile-nav-item {
+    color: #707072;
+}
+#mobile-menu-box.box-light .mobile-nav-item:hover,
+#mobile-menu-box.box-light .mobile-nav-item.active {
+    color: #111111;
+    background-color: rgba(0, 0, 0, 0.04);
 }
 
 /* ===== FADE-IN ON SCROLL ===== */
@@ -171,13 +275,6 @@
 .fade-in-up[data-delay="200"] { transition-delay: 0.2s; }
 .fade-in-up[data-delay="300"] { transition-delay: 0.3s; }
 .fade-in-up[data-delay="400"] { transition-delay: 0.4s; }
-
-/* ===== MOBILE: matikan parallax fixed bg ===== */
-@media (max-width: 768px) {
-    .parallax-hero {
-        background-attachment: scroll;
-    }
-}
 
 /* ponytail: native JS scroll-linked horizontal translate. batas: scroll kartu horizontal terhubung ke sumbu vertikal. upgrade ke GSAP ScrollTrigger jika butuh snap otomatis atau scrub timeline multi-layer */
 .portfolio-track {

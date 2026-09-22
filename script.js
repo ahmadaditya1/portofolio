@@ -1,17 +1,36 @@
 $(document).ready(function () {
 
-    // ===== NAVBAR SCROLL EFFECT =====
+    // ===== NAVBAR SCROLL EFFECT (HERO DARK vs SCROLLED LIGHT) =====
     const nav = document.getElementById('primary-nav');
+    const heroSection = document.getElementById('beranda');
+    const mobileBox = document.getElementById('mobile-menu-box');
 
     function updateNavStyle() {
-        if (window.pageYOffset > 60) {
-            nav.classList.add('nav-scrolled');
+        if (!nav) return;
+        const navHeight = nav.offsetHeight || 60;
+        const heroBottom = heroSection ? heroSection.getBoundingClientRect().bottom : 0;
+
+        // Jika bagian bawah hero masih di bawah navbar (masih di area hero)
+        if (heroBottom > navHeight + 40) {
+            nav.classList.add('nav-dark');
+            nav.classList.remove('nav-light');
+            if (mobileBox) {
+                mobileBox.classList.add('box-dark');
+                mobileBox.classList.remove('box-light');
+            }
         } else {
-            nav.classList.remove('nav-scrolled');
+            // Sudah lewat hero (berada di background putih)
+            nav.classList.add('nav-light');
+            nav.classList.remove('nav-dark');
+            if (mobileBox) {
+                mobileBox.classList.add('box-light');
+                mobileBox.classList.remove('box-dark');
+            }
         }
     }
 
-    window.addEventListener('scroll', updateNavStyle);
+    window.addEventListener('scroll', updateNavStyle, { passive: true });
+    window.addEventListener('resize', updateNavStyle, { passive: true });
     updateNavStyle(); // init
 
     // ===== FADE-IN ON SCROLL =====
@@ -64,20 +83,22 @@ $(document).ready(function () {
         let scrollPos = $(window).scrollTop();
 
         $("section").each(function () {
-            let top = $(this).offset().top - 100;
+            let top = $(this).offset().top - 120;
             let bottom = top + $(this).outerHeight();
             let id = $(this).attr("id");
 
             if (scrollPos >= top && scrollPos < bottom) {
-                $(".nav-link").removeClass("active");
+                $(".nav-pill").removeClass("active");
                 $("#link-" + id).addClass("active");
+                $(".mobile-nav-item").removeClass("active");
+                $("#m-link-" + id).addClass("active");
             }
         });
     });
 
     // ===== MOBILE NAV TOGGLE =====
     $("#toggle-menu").click(function () {
-        $("#nav-center").toggleClass("show");
+        $("#mobile-dropdown").toggleClass("hidden");
         let icon = $(this).find("i");
         if (icon.hasClass("fa-bars")) {
             icon.removeClass("fa-bars").addClass("fa-xmark");
@@ -87,11 +108,9 @@ $(document).ready(function () {
     });
 
     // tutup mobile nav saat link diklik
-    $(".nav-link").click(function () {
-        if ($(window).width() <= 768) {
-            $("#nav-center").removeClass("show");
-            $("#toggle-menu").find("i").removeClass("fa-xmark").addClass("fa-bars");
-        }
+    $(".mobile-nav-item").click(function () {
+        $("#mobile-dropdown").addClass("hidden");
+        $("#toggle-menu").find("i").removeClass("fa-xmark").addClass("fa-bars");
     });
 
     // ===== SMOOTH SCROLL =====
@@ -101,8 +120,9 @@ $(document).ready(function () {
             let hash = this.hash;
             let target = $(hash);
             if (target.length) {
+                const targetOffset = (hash === '#beranda') ? 0 : (target.offset().top - 60);
                 $("html, body").animate(
-                    { scrollTop: target.offset().top - 70 },
+                    { scrollTop: targetOffset },
                     500
                 );
             }

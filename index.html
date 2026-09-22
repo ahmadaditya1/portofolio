@@ -59,35 +59,55 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-    <!-- navigasi utama -->
-    <header class="sticky top-0 left-0 w-full z-[100] bg-canvas h-[60px] flex items-center border-b border-hairline-soft transition-all duration-350 ease-smooth" id="primary-nav">
-        <div class="w-full max-w-[1440px] mx-auto px-6 flex justify-between items-center">
+    <!-- navigasi utama (Floating Dynamic Island) -->
+    <header class="fixed top-0 left-0 w-full z-[100] px-4 sm:px-6 pt-4 sm:pt-5 pointer-events-none transition-all duration-300" id="nav-outer">
+        <div class="max-w-[760px] mx-auto flex items-center justify-between pointer-events-auto rounded-full px-4 sm:px-6 py-2.5 sm:py-3 transition-all duration-350 ease-smooth" id="primary-nav">
+            
+            <!-- Logo / Brand -->
+            <a href="#beranda" class="font-hero font-extrabold text-sm sm:text-base tracking-tight flex items-center gap-2 select-none group" id="nav-brand">
+                <span class="w-2 h-2 rounded-full bg-electric group-hover:scale-125 transition-transform"></span>
+                <span>ahmdaadit</span>
+            </a>
 
-            <nav class="flex-grow flex justify-center max-md:fixed max-md:top-[60px] max-md:left-0 max-md:w-full max-md:bg-canvas max-md:border-b max-md:border-hairline-soft max-md:py-6 max-md:hidden max-md:z-[99]" id="nav-center">
-                <ul class="flex gap-6 max-md:flex-col max-md:items-center max-md:gap-6">
-                    <li><a href="#beranda" class="nav-link text-base font-medium text-ink hover:text-mute active" id="link-beranda">Beranda</a></li>
-                    <li><a href="#tentang" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-tentang">Tentang</a></li>
-                    <li><a href="#pengalaman" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-pengalaman">Pengalaman</a></li>
-                    <li><a href="#portofolio" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-portofolio">Portofolio</a></li>
-                    <li><a href="#kontak" class="nav-link text-base font-medium text-ink hover:text-mute" id="link-kontak">Kontak</a></li>
+            <!-- Menu Links (Desktop) -->
+            <nav class="flex items-center max-md:hidden" id="nav-center">
+                <ul class="flex items-center gap-1 sm:gap-2">
+                    <li><a href="#beranda" class="nav-pill active" id="link-beranda">Beranda</a></li>
+                    <li><a href="#tentang" class="nav-pill" id="link-tentang">Tentang</a></li>
+                    <li><a href="#pengalaman" class="nav-pill" id="link-pengalaman">Pengalaman</a></li>
+                    <li><a href="#portofolio" class="nav-pill" id="link-portofolio">Portofolio</a></li>
+                    <li><a href="#kontak" class="nav-pill" id="link-kontak">Kontak</a></li>
                 </ul>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <button class="hidden max-md:flex w-10 h-10 rounded-full bg-soft-cloud text-ink text-lg items-center justify-center transition-all duration-200" id="toggle-menu" aria-label="Toggle Navigation">
+            <!-- Action Button / Mobile Menu -->
+            <div class="flex items-center gap-2">
+                <a href="#kontak" class="text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full transition-all duration-200 hidden sm:inline-flex items-center gap-1.5" id="nav-cta">
+                    <span>Hubungi</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <button class="hidden max-md:flex w-9 h-9 rounded-full text-sm items-center justify-center transition-all duration-200 cursor-pointer" id="toggle-menu" aria-label="Toggle Navigation">
                     <i class="fa-solid fa-bars"></i>
                 </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer (Dropdown di bawah pill) -->
+        <div class="max-w-[760px] mx-auto mt-2 pointer-events-auto hidden md:hidden" id="mobile-dropdown">
+            <div class="rounded-2xl p-4 transition-all duration-350 shadow-xl backdrop-blur-xl" id="mobile-menu-box">
+                <ul class="flex flex-col gap-2">
+                    <li><a href="#beranda" class="mobile-nav-item active" id="m-link-beranda">Beranda</a></li>
+                    <li><a href="#tentang" class="mobile-nav-item" id="m-link-tentang">Tentang</a></li>
+                    <li><a href="#pengalaman" class="mobile-nav-item" id="m-link-pengalaman">Pengalaman</a></li>
+                    <li><a href="#portofolio" class="mobile-nav-item" id="m-link-portofolio">Portofolio</a></li>
+                    <li><a href="#kontak" class="mobile-nav-item" id="m-link-kontak">Kontak</a></li>
+                </ul>
             </div>
         </div>
     </header>
     <main>
         <!-- beranda -->
-        <section id="beranda" class="relative min-h-[100vh] bg-ink flex items-center justify-center parallax-hero">
-            <!-- decorative bg -->
-            <div class="absolute inset-0 z-[1] pointer-events-none">
-                <div class="absolute top-[15%] right-[10%] w-32 h-32 rounded-full border border-[rgba(255,255,255,0.04)]"></div>
-                <div class="absolute top-[60%] left-[8%] w-48 h-48 rounded-full border border-[rgba(255,255,255,0.03)]"></div>
-            </div>
+        <section id="beranda" class="relative min-h-[100vh] bg-ink flex items-center justify-center">
             <!-- bottom gradient -->
             <div class="absolute bottom-0 left-0 w-full h-[250px] bg-gradient-to-t from-ink to-transparent z-[1] pointer-events-none"></div>
 
@@ -143,7 +163,7 @@
         <section id="tentang" class="py-24 max-md:py-16">
             <div class="w-full max-w-[1440px] mx-auto px-6">
                 <div class="mb-12 fade-in-up">
-                    <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-2">TENTANG SAYA</h2>
+                    <h2 class="font-hero text-[clamp(28px,4vw,40px)] font-extrabold leading-[1.1] tracking-tight text-ink mb-2">Tentang Saya</h2>
                 </div>
 
                 <div class="grid grid-cols-[1.3fr_1fr] gap-12 items-start max-lg:grid-cols-1 max-lg:gap-8">
@@ -204,7 +224,7 @@
         <section id="pengalaman" class="py-24 max-md:py-16 bg-soft-cloud/30 border-t border-hairline-soft">
             <div class="w-full max-w-[1440px] mx-auto px-6">
                 <div class="mb-14 fade-in-up">
-                    <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-2">PENGALAMAN</h2>
+                    <h2 class="font-hero text-[clamp(28px,4vw,40px)] font-extrabold leading-[1.1] tracking-tight text-ink mb-2">Pengalaman</h2>
                     <p class="text-base text-mute max-w-[600px] leading-normal">Perjalanan kepemimpinan, industri kreatif, organisasi kemahasiswaan, dan manajemen acara.</p>
                 </div>
 
@@ -426,7 +446,7 @@
                 <div class="w-full max-w-[1440px] mx-auto px-6 mb-4">
                     <div class="flex justify-between items-end gap-4 flex-wrap">
                         <div>
-                            <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-1">PORTOFOLIO</h2>
+                            <h2 class="font-hero text-[clamp(28px,4vw,40px)] font-extrabold leading-[1.1] tracking-tight text-ink mb-1">Portofolio</h2>
                             <p class="text-sm text-mute">Scroll ke bawah untuk menggeser karya &rarr;</p>
                         </div>
                         <div class="flex gap-2 flex-wrap">
@@ -590,7 +610,7 @@
                     
                     <div class="fade-in-up">
                         <div class="mb-8">
-                            <h2 class="font-display text-[clamp(28px,4vw,40px)] font-normal leading-[1.1] tracking-[1px] uppercase text-ink mb-2">KONTAK</h2>
+                            <h2 class="font-hero text-[clamp(28px,4vw,40px)] font-extrabold leading-[1.1] tracking-tight text-ink mb-2">Kontak</h2>
                             <p class="text-base text-mute max-w-[600px] leading-normal">Tertarik untuk berkolaborasi atau ingin mendiskusikan sebuah proyek? Hubungi saya kapan saja.</p>
                         </div>
                         <div class="flex gap-3 flex-wrap">
