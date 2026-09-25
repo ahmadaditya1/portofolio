@@ -324,10 +324,26 @@ $(document).ready(function () {
         const titleEl = document.getElementById('hero-title');
         if (!aditya || !nugrahaLine || !titleEl) return;
 
+        // Di mobile/layar sempit (< 768px): jangan geser agar teks tidak overflow ke kanan
+        if (window.innerWidth < 768) {
+            nugrahaLine.style.paddingLeft = '0px';
+            return;
+        }
+
         const titleLeft = titleEl.getBoundingClientRect().left;
         const adityaRight = aditya.getBoundingClientRect().right;
         const offset = adityaRight - titleLeft;
-        nugrahaLine.style.paddingLeft = offset + 'px';
+
+        // Pastikan tidak melampaui lebar container
+        const containerWidth = titleEl.parentElement ? titleEl.parentElement.offsetWidth : window.innerWidth;
+        const nugrahaWord = document.getElementById('word-nugraha');
+        const nugrahaWidth = nugrahaWord ? nugrahaWord.offsetWidth : 200;
+
+        if (offset + nugrahaWidth > containerWidth) {
+            nugrahaLine.style.paddingLeft = '0px';
+        } else {
+            nugrahaLine.style.paddingLeft = offset + 'px';
+        }
     }
 
     // Run on load, resize, and after fonts settle
